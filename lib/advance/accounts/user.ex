@@ -129,6 +129,11 @@ defmodule Advance.Accounts.User do
   end
 
   @doc """
+  Returns true if the user has confirmed their account, false otherwise
+  """
+  def is_confirmed?(user), do: user.confirmed_at != nil
+
+  @doc """
   Validates the current password otherwise adds an error to the changeset.
   """
   def validate_current_password(changeset, password) do

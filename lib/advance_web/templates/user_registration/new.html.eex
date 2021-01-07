@@ -7,13 +7,13 @@
   <% end %>
 
   <div class="mt-4 mb-4">
-    <%= label f, :email, class: "form-label" %>
+    <%= label f, :email, "E-Mail", class: "form-label" %>
     <%= text_input f, :email, required: true, class: "form-input" %>
     <%= error_tag f, :email %>
   </div>
 
   <div class="mb-4">
-    <%= label f, :password, class: "form-label" %>
+    <%= label f, :password, "Senha", class: "form-label" %>
     <%= password_input f, :password, required: true, class: "form-input" %>
     <%= error_tag f, :password %>
   </div>

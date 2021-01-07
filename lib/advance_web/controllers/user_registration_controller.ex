@@ -20,8 +20,12 @@ defmodule AdvanceWeb.UserRegistrationController do
           )
 
         conn
-        |> put_flash(:info, "User created successfully.")
-        |> UserAuth.log_in_user(user)
+        |> put_flash(
+          :info,
+          "Conta criada com sucesso. Verifique seu e-mail para instruções de confirmação."
+        )
+        # |> UserAuth.log_in_user(user)
+        |> redirect(to: Routes.user_session_path(conn, :new))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
