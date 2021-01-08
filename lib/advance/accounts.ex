@@ -87,12 +87,10 @@ defmodule Advance.Accounts do
 
   """
   def set_register_user(attrs) do
-    case Repo.get_by(User, role: "admin") do
-      nil ->
-        register_admin(attrs)
-
-      _ ->
-        register_user(attrs)
+    if Repo.exists?(User) do
+      register_user(attrs)
+    else
+      register_admin(attrs)
     end
   end
 
