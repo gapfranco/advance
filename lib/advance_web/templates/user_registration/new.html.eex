@@ -12,10 +12,22 @@
     <%= error_tag f, :email %>
   </div>
 
+  <div class="mt-4 mb-4">
+    <%= label f, :name, "Nome", class: "form-label" %>
+    <%= text_input f, :name, required: true, class: "form-input" %>
+    <%= error_tag f, :name %>
+  </div>
+
   <div class="mb-4">
     <%= label f, :password, "Senha", class: "form-label" %>
     <%= password_input f, :password, required: true, class: "form-input" %>
     <%= error_tag f, :password %>
+  </div>
+
+  <div class="mb-4">
+    <%= label f, :password_confirmation, "Confirmar Senha", class: "form-label" %>
+    <%= password_input f, :password_confirmation, required: true, class: "form-input" %>
+    <%= error_tag f, :password_confirmation %>
   </div>
 
   <div class="mt-6 flex justify-center">

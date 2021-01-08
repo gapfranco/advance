@@ -51,6 +51,7 @@ defmodule Advance.Accounts do
     cond do
       !User.valid_password?(user, password) -> {:error, :bad_username_or_password}
       !User.is_confirmed?(user) -> {:error, :not_confirmed}
+      User.is_blocked?(user) -> {:error, :user_blocked}
       true -> {:ok, user}
     end
   end
@@ -71,23 +72,48 @@ defmodule Advance.Accounts do
   """
   def get_user!(id), do: Repo.get!(User, id)
 
+  ## Set User registration
+
+  @doc """
+  Registers a user depending on current content.
+
+  ## Examples
+
+      iex> set_register_user(%{field: value})
+      {:ok, %User{}}
+
+      iex> set_register_user(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def set_register_user(attrs) do
+    case Repo.get_by(User, role: "admin") do
+      nil ->
+        register_admin(attrs)
+
+      _ ->
+        register_user(attrs)
+    end
+  end
+
   ## User registration
 
   @doc """
   Registers a user.
-
-  ## Examples
-
-      iex> register_user(%{field: value})
-      {:ok, %User{}}
-
-      iex> register_user(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
   """
   def register_user(attrs) do
     %User{}
     |> User.registration_changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Registers an admin.
+  """
+
+  def register_admin(attrs) do
+    %User{}
+    |> User.admin_registration_changeset(attrs)
     |> Repo.insert()
   end
 

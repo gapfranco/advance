@@ -6,8 +6,12 @@ defmodule Advance.Repo.Migrations.CreateUsersAuthTables do
 
     create table(:users) do
       add :email, :citext, null: false
+      add :name, :citext, null: false
+      add :role, :string, null: false, default: "user"
       add :hashed_password, :string, null: false
       add :confirmed_at, :naive_datetime
+      add :is_blocked, :boolean, default: false
+      add :avatar, :string
       timestamps()
     end
 

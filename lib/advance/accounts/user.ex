@@ -2,13 +2,22 @@ defmodule Advance.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
   use Waffle.Ecto.Schema
+  import EctoEnum
 
-  @derive {Inspect, except: [:password]}
+  defenum(RolesEnum, :role, [
+    :user,
+    :admin
+  ])
+
+  # @derive {Inspect, except: [:password]}
   schema "users" do
     field :email, :string
+    field :name, :string
+    field :role, RolesEnum, default: :user
     field :password, :string, virtual: true
     field :hashed_password, :string
     field :confirmed_at, :naive_datetime
+    field :is_blocked, :boolean, default: false
     field :avatar, Advance.AvatarUploader.Type
 
     timestamps()
@@ -33,9 +42,21 @@ defmodule Advance.Accounts.User do
   """
   def registration_changeset(user, attrs, opts \\ []) do
     user
-    |> cast(attrs, [:email, :password])
+    |> cast(attrs, [:email, :password, :name])
     |> validate_email()
+    |> validate_confirmation(:password, message: "senhas não conferem")
     |> validate_password(opts)
+  end
+
+  def admin_registration_changeset(user, attrs) do
+    user
+    |> registration_changeset(attrs)
+    |> prepare_changes(&set_admin_role/1)
+  end
+
+  defp set_admin_role(changeset) do
+    changeset
+    |> put_change(:role, :admin)
   end
 
   defp validate_email(changeset) do
@@ -132,6 +153,11 @@ defmodule Advance.Accounts.User do
   Returns true if the user has confirmed their account, false otherwise
   """
   def is_confirmed?(user), do: user.confirmed_at != nil
+
+  @doc """
+  Returns true if the user has been blocked, false otherwise
+  """
+  def is_blocked?(user), do: user.is_blocked
 
   @doc """
   Validates the current password otherwise adds an error to the changeset.

@@ -27,6 +27,11 @@ defmodule AdvanceWeb.UserSessionController do
       {:error, :bad_username_or_password} ->
         render(conn, "new.html", error_message: "E-mail ou senha inválidos.")
 
+      {:error, :user_blocked} ->
+        render(conn, "new.html",
+          error_message: "Sua conta foi bloqueada, por favor contacte o administrador."
+        )
+
       {:error, :not_confirmed} ->
         user = Accounts.get_user_by_email(email)
 

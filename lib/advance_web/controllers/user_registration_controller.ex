@@ -3,7 +3,7 @@ defmodule AdvanceWeb.UserRegistrationController do
 
   alias Advance.Accounts
   alias Advance.Accounts.User
-  alias AdvanceWeb.UserAuth
+  # alias AdvanceWeb.UserAuth
 
   def new(conn, _params) do
     changeset = Accounts.change_user_registration(%User{})
@@ -11,7 +11,7 @@ defmodule AdvanceWeb.UserRegistrationController do
   end
 
   def create(conn, %{"user" => user_params}) do
-    case Accounts.register_user(user_params) do
+    case Accounts.set_register_user(user_params) do
       {:ok, user} ->
         {:ok, _} =
           Accounts.deliver_user_confirmation_instructions(
