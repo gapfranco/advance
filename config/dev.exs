@@ -78,3 +78,9 @@ config :phoenix, :plug_init_mode, :runtime
 import_config "dev.secret.exs"
 
 config :advance, Advance.Mailer, adapter: Bamboo.SesAdapter
+
+config :waffle,
+  # or Waffle.Storage.Local
+  storage: Waffle.Storage.S3,
+  # if using S3
+  bucket: "advancem2i"

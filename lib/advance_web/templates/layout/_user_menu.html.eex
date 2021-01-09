@@ -1,6 +1,11 @@
 <%= if @current_user do %>
   <%= link "Parâmetros", to: Routes.user_settings_path(@conn, :edit), class: "btn btn-sm btn-link" %>
   <%= link "Sair", to: Routes.user_session_path(@conn, :delete), method: :delete, class: "btn btn-sm btn-link" %>
+  <%= if @current_user.avatar do %>  
+    <div class="avatar"><img src=<%= avatar(@current_user) %> alt="Photo"></div>
+  <% else %>
+    <div class="avatar"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" /></svg></div>
+  <% end %>
 <% else %>
   <%= link "Conectar", to: Routes.user_session_path(@conn, :new), class: "btn btn-sm btn-link" %>
   <%= link "Criar conta", to: Routes.user_registration_path(@conn, :new), class: "btn btn-sm btn-primary" %>

@@ -18,7 +18,7 @@ defmodule Advance.Accounts.User do
     field :hashed_password, :string
     field :confirmed_at, :naive_datetime
     field :is_blocked, :boolean, default: false
-    field :avatar, Advance.AvatarUploader.Type
+    field :avatar, Advance.Avatar.Type
 
     timestamps()
   end

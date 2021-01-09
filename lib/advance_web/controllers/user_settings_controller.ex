@@ -50,6 +50,21 @@ defmodule AdvanceWeb.UserSettingsController do
     end
   end
 
+  def update(conn, %{"action" => "update_avatar", "user" => user_params} = _params) do
+    user = conn.assigns.current_user
+    IO.inspect(user_params)
+
+    case Accounts.update_user_avatar(user, user_params) do
+      {:ok, _user} ->
+        conn
+        |> put_flash(:info, "Avatar alterado com sucesso.")
+        |> redirect(to: Routes.user_settings_path(conn, :edit))
+
+      {:error, changeset} ->
+        render(conn, "edit.html", avatar_changeset: changeset)
+    end
+  end
+
   def confirm_email(conn, %{"token" => token}) do
     case Accounts.update_user_email(conn.assigns.current_user, token) do
       :ok ->
@@ -64,19 +79,19 @@ defmodule AdvanceWeb.UserSettingsController do
     end
   end
 
-  def update_avatar(conn, %{"user" => user_params}) do
-    user = conn.assigns.current_user
+  # def update_avatar(conn, %{"user" => user_params}) do
+  #   user = conn.assigns.current_user
 
-    case Accounts.update_user_avatar(user, user_params) do
-      {:ok, _user} ->
-        conn
-        |> put_flash(:info, "Avatar alterado com sucesso.")
-        |> redirect(to: Routes.user_settings_path(conn, :edit))
+  #   case Accounts.update_user_avatar(user, user_params) do
+  #     {:ok, _user} ->
+  #       conn
+  #       |> put_flash(:info, "Avatar alterado com sucesso.")
+  #       |> redirect(to: Routes.user_settings_path(conn, :edit))
 
-      {:error, changeset} ->
-        render(conn, "edit.html", avatar_changeset: changeset)
-    end
-  end
+  #     {:error, changeset} ->
+  #       render(conn, "edit.html", avatar_changeset: changeset)
+  #   end
+  # end
 
   defp assign_email_and_password_changesets(conn, _opts) do
     user = conn.assigns.current_user

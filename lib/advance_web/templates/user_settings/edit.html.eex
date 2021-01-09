@@ -5,6 +5,26 @@
         <h5 class="card-title">Settings</h5>
       </div>
       <div class="card-body prose">
+
+        <h4>Muda Avatar</h4>
+
+        <%= form_for @password_changeset, Routes.user_settings_path(@conn, :update), [multipart: true], fn f -> %>
+          <%= if @password_changeset.action do %>
+            <div class="alert alert-danger">
+              <p>Oops, something went wrong! Please check the errors below.</p>
+            </div>
+          <% end %>
+          <%= hidden_input f, :action, name: "action", value: "update_avatar" %>
+          <div class="mt-8 mb-2">
+            <label>Photo</label>
+            <%= file_input f, :avatar, class: "btn btn-primary" %>
+          </div>
+          <div class="mt-8 mb-2">
+            <%= submit "Mudar Avatar", class: "btn btn-primary btn-sm" %>
+          </div>
+
+        <% end %>
+
         <h4>Change e-mail</h4>
 
         <%= form_for @email_changeset, Routes.user_settings_path(@conn, :update), fn f -> %>
@@ -13,6 +33,8 @@
               <p>Oops, something went wrong! Please check the errors below.</p>
             </div>
           <% end %>
+
+          <%= hidden_input f, :action, name: "action", value: "update_email" %>
 
           <div class="mb-6">
             <%= label f, :email, class: "form-label" %>
@@ -33,13 +55,13 @@
 
         <h4>Change password</h4>
 
-        <%= form_for @password_changeset, Routes.user_settings_path(@conn, :update), fn f -> %>
+        <%= form_for @password_changeset, Routes.user_settings_path(@conn, :update), [multipart: true], fn f -> %>
           <%= if @password_changeset.action do %>
             <div class="alert alert-danger">
               <p>Oops, something went wrong! Please check the errors below.</p>
             </div>
           <% end %>
-
+          <%= hidden_input f, :action, name: "action", value: "update_password" %>
           <div class="mb-6">
             <%= label f, :password, "New password", class: "form-label" %>
             <%= password_input f, :password, required: true, class: "form-input" %>
