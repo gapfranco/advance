@@ -1,0 +1,31 @@
+<div class="flex justify-center">
+  <div class="w-full md:w-2/3 mt-4">
+    <div class="shadow card">
+      <div class="card-header">
+        <div class="font-semibold text-2xl text-primary">Avatar</div>
+      </div>
+      <div class="card-body prose">
+
+        <%= form_for @avatar_changeset, Routes.user_settings_path(@conn, :update_avatar), [multipart: true], fn f -> %>
+          <%= if @avatar_changeset.action do %>
+            <div class="alert alert-danger">
+              <p>Ocorreu um erro, verifique os campos abaixo.</p>
+            </div>
+          <% end %>
+          <%= hidden_input f, :action, name: "action", value: "update_avatar" %>
+          
+          <label class="form-input cursor-pointer" for="avatar">
+            <span class="block">Avatar</span>
+            <%= file_input f, :avatar %>
+          </label>
+
+          <div class="mt-4 mb-8">
+            <%= submit "Salvar o Avatar", class: "btn btn-primary btn-sm" %>
+          </div>
+
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>

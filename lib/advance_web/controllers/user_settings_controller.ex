@@ -27,14 +27,16 @@ defmodule AdvanceWeb.UserSettingsController do
           :info,
           "A link to confirm your email change has been sent to the new address."
         )
-        |> redirect(to: Routes.user_settings_path(conn, :edit))
+        |> redirect(to: Routes.page_path(conn, :index))
+
+      # |> redirect(to: Routes.user_settings_path(conn, :edit))
 
       {:error, changeset} ->
         render(conn, "edit.html", email_changeset: changeset)
     end
   end
 
-  def update(conn, %{"action" => "update_password"} = params) do
+  def update_password(conn, %{"action" => "update_password"} = params) do
     %{"current_password" => password, "user" => user_params} = params
     user = conn.assigns.current_user
 
@@ -46,23 +48,12 @@ defmodule AdvanceWeb.UserSettingsController do
         |> UserAuth.log_in_user(user)
 
       {:error, changeset} ->
-        render(conn, "edit.html", password_changeset: changeset)
+        render(conn, "update_password.html", password_changeset: changeset)
     end
   end
 
-  def update(conn, %{"action" => "update_avatar", "user" => user_params} = _params) do
-    user = conn.assigns.current_user
-    IO.inspect(user_params)
-
-    case Accounts.update_user_avatar(user, user_params) do
-      {:ok, _user} ->
-        conn
-        |> put_flash(:info, "Avatar alterado com sucesso.")
-        |> redirect(to: Routes.user_settings_path(conn, :edit))
-
-      {:error, changeset} ->
-        render(conn, "edit.html", avatar_changeset: changeset)
-    end
+  def update_password(conn, _params) do
+    render(conn, "update_password.html")
   end
 
   def confirm_email(conn, %{"token" => token}) do
@@ -70,7 +61,9 @@ defmodule AdvanceWeb.UserSettingsController do
       :ok ->
         conn
         |> put_flash(:info, "E-mail alterado com sucesso.")
-        |> redirect(to: Routes.user_settings_path(conn, :edit))
+        |> redirect(to: Routes.page_path(conn, :index))
+
+      # |> redirect(to: Routes.user_settings_path(conn, :edit))
 
       :error ->
         conn
@@ -79,19 +72,23 @@ defmodule AdvanceWeb.UserSettingsController do
     end
   end
 
-  # def update_avatar(conn, %{"user" => user_params}) do
-  #   user = conn.assigns.current_user
+  def update_avatar(conn, %{"user" => user_params}) do
+    user = conn.assigns.current_user
 
-  #   case Accounts.update_user_avatar(user, user_params) do
-  #     {:ok, _user} ->
-  #       conn
-  #       |> put_flash(:info, "Avatar alterado com sucesso.")
-  #       |> redirect(to: Routes.user_settings_path(conn, :edit))
+    case Accounts.update_user_avatar(user, user_params) do
+      {:ok, _user} ->
+        conn
+        |> put_flash(:info, "Avatar alterado com sucesso.")
+        |> redirect(to: Routes.page_path(conn, :index))
 
-  #     {:error, changeset} ->
-  #       render(conn, "edit.html", avatar_changeset: changeset)
-  #   end
-  # end
+      {:error, changeset} ->
+        render(conn, "update_avatar.html", avatar_changeset: changeset)
+    end
+  end
+
+  def update_avatar(conn, _params) do
+    render(conn, "update_avatar.html")
+  end
 
   defp assign_email_and_password_changesets(conn, _opts) do
     user = conn.assigns.current_user
