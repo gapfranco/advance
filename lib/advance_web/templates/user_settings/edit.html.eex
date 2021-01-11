@@ -2,13 +2,13 @@
   <div class="w-full md:w-2/3 mt-4">
     <div class="shadow card">
       <div class="card-header">
-        <div class="font-semibold text-2xl text-primary">Dados do perfil</div>
+        <div class="font-semibold text-2xl text-primary">Alteração de e-mail</div>
       </div>
       <div class="card-body prose">
 
         <%= form_for @email_changeset, Routes.user_settings_path(@conn, :update), fn f -> %>
           <%= if @email_changeset.action do %>
-            <div class="alert alert-danger">
+            <div class="alert alert-danger text-red-600">
               <p>Ocorreu um erro, verifique os campos abaixo.</p>
             </div>
           <% end %>
@@ -18,17 +18,17 @@
           <div class="mb-6">
             <%= label f, :email, "E-Mail", class: "form-label" %>
             <%= text_input f, :email, required: true, class: "form-input" %>
-            <%= error_tag f, :email %>
+            <span class="text-red-600"><%= error_tag f, :email %></span>
           </div>
 
           <div class="mb-6">
             <%= label f, :current_password, "Informe a senha atual",  for: "current_password_for_email" %>
             <%= password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_email", class: "form-input" %>
-            <%= error_tag f, :current_password %>
+            <span class="text-red-600"><%= error_tag f, :current_password %></span>
           </div>
 
           <div class="mt-4 mb-8">
-            <%= submit "Alterar E-Mail", class: "btn btn-primary btn-sm" %>
+            <%= submit "Alterar e-Mail", class: "btn btn-primary btn-sm" %>
           </div>
         <% end %>
 

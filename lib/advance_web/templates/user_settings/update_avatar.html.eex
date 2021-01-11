@@ -8,7 +8,7 @@
 
         <%= form_for @avatar_changeset, Routes.user_settings_path(@conn, :update_avatar), [multipart: true], fn f -> %>
           <%= if @avatar_changeset.action do %>
-            <div class="alert alert-danger">
+            <div class="alert alert-danger text-red-600">
               <p>Ocorreu um erro, verifique os campos abaixo.</p>
             </div>
           <% end %>
@@ -17,7 +17,9 @@
           <label class="form-input cursor-pointer" for="avatar">
             <span class="block">Avatar</span>
             <%= file_input f, :avatar %>
+            <div class="text-red-600"><%= error_tag f, :avatar %></div>
           </label>
+          <span class="text-xs text-gray-500">Arquivo de imagem (.jpeg .jpg .gif .png) de até 100KB</span>
 
           <div class="mt-4 mb-8">
             <%= submit "Salvar o Avatar", class: "btn btn-primary btn-sm" %>

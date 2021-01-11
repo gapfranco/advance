@@ -36,6 +36,24 @@ defmodule AdvanceWeb.UserSettingsController do
     end
   end
 
+  def update_profile(conn, %{"user" => user_params}) do
+    user = conn.assigns.current_user
+
+    case Accounts.update_user_profile(user, user_params) do
+      {:ok, _user} ->
+        conn
+        |> put_flash(:info, "Perfil alterado com sucesso.")
+        |> redirect(to: Routes.page_path(conn, :index))
+
+      {:error, changeset} ->
+        render(conn, "update_profile.html", prfile_changeset: changeset)
+    end
+  end
+
+  def update_profile(conn, _params) do
+    render(conn, "update_profile.html")
+  end
+
   def update_password(conn, %{"action" => "update_password"} = params) do
     %{"current_password" => password, "user" => user_params} = params
     user = conn.assigns.current_user
@@ -44,7 +62,7 @@ defmodule AdvanceWeb.UserSettingsController do
       {:ok, user} ->
         conn
         |> put_flash(:info, "Senha alterada com sucesso.")
-        |> put_session(:user_return_to, Routes.user_settings_path(conn, :edit))
+        |> put_session(:user_return_to, Routes.page_path(conn, :index))
         |> UserAuth.log_in_user(user)
 
       {:error, changeset} ->
@@ -97,6 +115,7 @@ defmodule AdvanceWeb.UserSettingsController do
     |> assign(:email_changeset, Accounts.change_user_email(user))
     |> assign(:password_changeset, Accounts.change_user_password(user))
     |> assign(:avatar_changeset, Accounts.change_user_avatar(user))
+    |> assign(:profile_changeset, Accounts.change_user_profile(user))
     |> assign(:user, user)
   end
 end

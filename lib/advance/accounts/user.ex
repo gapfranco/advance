@@ -62,7 +62,7 @@ defmodule Advance.Accounts.User do
   defp validate_email(changeset) do
     changeset
     |> validate_required([:email])
-    |> validate_format(:email, ~r/^[^\s]+@[^\s]+$/, message: "must have the @ sign and no spaces")
+    |> validate_format(:email, ~r/^[^\s]+@[^\s]+$/, message: "formato de email inválido")
     |> validate_length(:email, max: 160)
     |> unsafe_validate_unique(:email, Advance.Repo)
     |> unique_constraint(:email)
@@ -71,7 +71,7 @@ defmodule Advance.Accounts.User do
   defp validate_password(changeset, opts) do
     changeset
     |> validate_required([:password])
-    |> validate_length(:password, min: 12, max: 80)
+    |> validate_length(:password, min: 6, max: 80, message: "deve ter entre 6 e 80 caracteres")
     # |> validate_format(:password, ~r/[a-z]/, message: "at least one lower case character")
     # |> validate_format(:password, ~r/[A-Z]/, message: "at least one upper case character")
     # |> validate_format(:password, ~r/[!?@#$%^&*_0-9]/, message: "at least one digit or punctuation character")
@@ -92,6 +92,16 @@ defmodule Advance.Accounts.User do
   end
 
   @doc """
+  A user changeset for changing the user profile.
+
+  """
+  def profile_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:name])
+    |> validate_required([:name])
+  end
+
+  @doc """
   A user changeset for changing the email.
 
   It requires the email to change otherwise an error is added.
@@ -102,7 +112,7 @@ defmodule Advance.Accounts.User do
     |> validate_email()
     |> case do
       %{changes: %{email: _}} = changeset -> changeset
-      %{} = changeset -> add_error(changeset, :email, "did not change")
+      %{} = changeset -> add_error(changeset, :email, "não mudou")
     end
   end
 
@@ -121,7 +131,7 @@ defmodule Advance.Accounts.User do
   def password_changeset(user, attrs, opts \\ []) do
     user
     |> cast(attrs, [:password])
-    |> validate_confirmation(:password, message: "does not match password")
+    |> validate_confirmation(:password, message: "senhas não conferem")
     |> validate_password(opts)
   end
 
@@ -166,7 +176,7 @@ defmodule Advance.Accounts.User do
     if valid_password?(changeset.data, password) do
       changeset
     else
-      add_error(changeset, :current_password, "is not valid")
+      add_error(changeset, :current_password, "senha atual inválida")
     end
   end
 

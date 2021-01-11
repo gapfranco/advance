@@ -1,0 +1,32 @@
+<div class="flex justify-center">
+  <div class="w-full md:w-2/3 mt-4">
+    <div class="shadow card">
+      <div class="card-header">
+        <div class="font-semibold text-2xl text-primary">Dados do perfil</div>
+      </div>
+      <div class="card-body prose">
+
+        <%= form_for @profile_changeset, Routes.user_settings_path(@conn, :update_profile), fn f -> %>
+          <%= if @profile_changeset.action do %>
+            <div class="alert alert-danger text-red-600">
+              <p>Ocorreu um erro, verifique os campos abaixo.</p>
+            </div>
+          <% end %>
+
+          <%= hidden_input f, :action, name: "action", value: "update_name" %>
+
+          <div class="mb-6">
+            <%= label f, :name, "Nome", class: "form-label" %>
+            <%= text_input f, :name, required: true, class: "form-input" %>
+            <span class="text-red-600"><%= error_tag f, :name %></span>
+          </div>
+
+          <div class="mt-4 mb-8">
+            <%= submit "Alterar perfil", class: "btn btn-primary btn-sm" %>
+          </div>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>

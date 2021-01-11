@@ -69,6 +69,8 @@ defmodule AdvanceWeb.Router do
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
     get "/users/settings/update_avatar", UserSettingsController, :update_avatar
     put "/users/settings/update_avatar", UserSettingsController, :update_avatar
+    get "/users/settings/update_profile", UserSettingsController, :update_profile
+    put "/users/settings/update_profile", UserSettingsController, :update_profile
   end
 
   scope "/", AdvanceWeb do

@@ -413,4 +413,22 @@ defmodule Advance.Accounts do
   def change_user_avatar(%User{} = user) do
     User.avatar_changeset(user, %{})
   end
+
+  @doc """
+  Updates user profile.
+
+  """
+  def change_user_profile(%User{} = user) do
+    User.profile_changeset(user, %{})
+  end
+
+  @doc """
+  Updates user profile.
+
+  """
+  def update_user_profile(%User{} = user, attrs) do
+    user
+    |> User.profile_changeset(attrs)
+    |> Repo.update()
+  end
 end

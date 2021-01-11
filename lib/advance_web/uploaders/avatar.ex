@@ -14,7 +14,13 @@ defmodule Advance.Avatar do
 
   # Whitelist file extensions:
   def validate({file, _}) do
-    ~w(.jpg .jpeg .gif .png) |> Enum.member?(Path.extname(file.file_name))
+    with {:ok, %{size: size}} <- File.stat(file.path),
+         true <- size < 1024 * 100,
+         true <- ~w(.jpg .jpeg .gif .png) |> Enum.member?(Path.extname(file.file_name)) do
+      true
+    else
+      _ -> false
+    end
   end
 
   # Define a thumbnail transformation:

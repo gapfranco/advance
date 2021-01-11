@@ -11,13 +11,12 @@
   </head>
   <body class="flex flex-col h-full pt-20 bg-gray-100">
     <header class="fixed top-0 left-0 right-0 z-30 px-2 py-4 bg-white shadow sm:px-4">
-      <div class="container flex items-center justify-between mx-auto">
+      <div class="containerxx flex items-center justify-between mx-4">
         <a href="/" title="Advance Home Page" class="flex font-bold items-center text-2xl text-red-600">
           Advance
         </a>
         <div class="flex items-center space-x-1">
           <div class="hidden md:inline-flex space-x-1">
-            <!-- <%= link "Home", to: Routes.page_path(@conn, :index), class: "btn btn-sm btn-link" %> -->
             <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
               <%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "btn btn-sm btn-link" %>
             <% end %>
@@ -72,8 +71,8 @@
       </div>
     </header>
     <%= @inner_content %>
-    <footer class="py-6 mt-auto text-gray-600 bg-gray-800 footer">
-      <div class="container max-w-6xl px-4 mx-auto">
+    <footer class="py-6 mt-auto text-gray-400 bg-gray-800 footer">
+      <div class="container max-w-6xl px-4 ">
         <span class="text-muted">Advance</span>
       </div>
     </footer>
