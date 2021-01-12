@@ -17,24 +17,46 @@
          x-transition:leave="transition ease-in duration-100" 
          x-transition:leave-start="transform opacity-100 scale-100" 
          x-transition:leave-end="transform opacity-0 scale-95">
-      <p class="dropdown-header">Seu perfil</p>
+      <p class="dropdown-header"><%= gettext("Profile") %></p>
       <span class="dropdown-item"><svg xmlns="http://www.w3.org/2000/svg"   viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-        <%= link "Alterar perfil", to: Routes.user_settings_path(@conn, :update_profile), class: "ml-2" %></span>
+        <%= link gettext("Change profile"), to: Routes.user_settings_path(@conn, :update_profile), class: "ml-2" %></span>
       <span class="dropdown-item"><svg xmlns="http://www.w3.org/2000/svg"   viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-        <%= link "Trocar senha", to: Routes.user_settings_path(@conn, :update_password), class: "ml-2" %></span>
+        <%= link gettext("Change password"), to: Routes.user_settings_path(@conn, :update_password), class: "ml-2" %></span>
       <span class="dropdown-item">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56"><g id="Layer_28" data-name="Layer 28"><path d="M32,8.71A23.32,23.32,0,0,0,8.71,32C10,62.9,54,62.89,55.29,32A23.32,23.32,0,0,0,32,8.71Zm0,43.58A20.31,20.31,0,0,1,11.71,32C12.83,5.08,51.18,5.09,52.29,32A20.31,20.31,0,0,1,32,52.29Z"/><path d="M39.33,41a9.83,9.83,0,0,1-13.89,0,1.5,1.5,0,0,0-2.12,2.12,12.83,12.83,0,0,0,18.13,0A1.5,1.5,0,0,0,39.33,41Z"/><path d="M27.91,27.78A1.5,1.5,0,0,0,30,25.66a8.3,8.3,0,0,0-11.72,0,1.51,1.51,0,0,0,0,2.12,1.49,1.49,0,0,0,2.12,0A5.3,5.3,0,0,1,27.91,27.78Z"/><path d="M34,25.66a1.5,1.5,0,0,0,2.12,2.12,5.3,5.3,0,0,1,7.48,0,1.49,1.49,0,0,0,2.12,0,1.51,1.51,0,0,0,0-2.12A8.3,8.3,0,0,0,34,25.66Z"/></g></svg>
-        <%= link "Alterar avatar", to: Routes.user_settings_path(@conn, :update_avatar), class: "dropdown-item" %></span>
+        <%= link gettext("Change avatar"), to: Routes.user_settings_path(@conn, :update_avatar), class: "dropdown-item" %></span>
       <span class="dropdown-item"><svg xmlns="http://www.w3.org/2000/svg"   viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-at-sign"><circle cx="12" cy="12" r="4"></circle><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path></svg>
-        <%= link "Alterar e-mail", to: Routes.user_settings_path(@conn, :update), class: "ml-2" %></span>
+        <%= link gettext("Change e-mail"), to: Routes.user_settings_path(@conn, :update), class: "ml-2" %></span>
+      </span>
+      <div class="dropdown-divide"></div>
+      <p class="dropdown-header"><%= gettext("Locale") %></p>
+      <span class="dropdown-item">
+      <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"><circle style="fill:#6DA544;" cx="256" cy="256" r="256"/><polygon style="fill:#FFDA44;" points="256,100.174 467.478,256 256,411.826 44.522,256 "/> <circle style="fill:#F0F0F0;" cx="256" cy="256" r="89.043"/> <g>  <path style="fill:#0052B4;" d="M211.478,250.435c-15.484,0-30.427,2.355-44.493,6.725c0.623,48.64,40.227,87.884,89.015,87.884 c30.168,0,56.812-15.017,72.919-37.968C301.362,272.579,258.961,250.435,211.478,250.435z"/> <path style="fill:#0052B4;" d="M343.393,273.06c1.072-5.524,1.651-11.223,1.651-17.06c0-49.178-39.866-89.043-89.043-89.043 c-36.694,0-68.194,22.201-81.826,53.899c12.05-2.497,24.526-3.812,37.305-3.812C263.197,217.043,309.983,238.541,343.393,273.06z"/>
+        </g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
+      <%= link "Português", to: Routes.user_settings_path(@conn, :update_locale, "pt_BR"), class: "dropdown-item" %>
+      </span>
+      <span class="dropdown-item">
+      <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"     viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"> <circle style="fill:#F0F0F0;" cx="256" cy="256" r="256"/> <g> <path style="fill:#D80027;" d="M244.87,256H512c0-23.106-3.08-45.49-8.819-66.783H244.87V256z"/> <path style="fill:#D80027;" d="M244.87,122.435h229.556c-15.671-25.572-35.708-48.175-59.07-66.783H244.87V122.435z"/> <path style="fill:#D80027;" d="M256,512c60.249,0,115.626-20.824,159.356-55.652H96.644C140.374,491.176,195.751,512,256,512z"/> <path style="fill:#D80027;" d="M37.574,389.565h436.852c12.581-20.529,22.338-42.969,28.755-66.783H8.819 C15.236,346.596,24.993,369.036,37.574,389.565z"/> </g> 
+      <path style="fill:#0052B4;" d="M118.584,39.978h23.329l-21.7,15.765l8.289,25.509l-21.699-15.765L85.104,81.252l7.16-22.037
+        C73.158,75.13,56.412,93.776,42.612,114.552h7.475l-13.813,10.035c-2.152,3.59-4.216,7.237-6.194,10.938l6.596,20.301l-12.306-8.941
+        c-3.059,6.481-5.857,13.108-8.372,19.873l7.267,22.368h26.822l-21.7,15.765l8.289,25.509l-21.699-15.765l-12.998,9.444
+        C0.678,234.537,0,245.189,0,256h256c0-141.384,0-158.052,0-256C205.428,0,158.285,14.67,118.584,39.978z M128.502,230.4
+        l-21.699-15.765L85.104,230.4l8.289-25.509l-21.7-15.765h26.822l8.288-25.509l8.288,25.509h26.822l-21.7,15.765L128.502,230.4z
+        M120.213,130.317l8.289,25.509l-21.699-15.765l-21.699,15.765l8.289-25.509l-21.7-15.765h26.822l8.288-25.509l8.288,25.509h26.822
+        L120.213,130.317z M220.328,230.4l-21.699-15.765L176.93,230.4l8.289-25.509l-21.7-15.765h26.822l8.288-25.509l8.288,25.509h26.822
+        l-21.7,15.765L220.328,230.4z M212.039,130.317l8.289,25.509l-21.699-15.765l-21.699,15.765l8.289-25.509l-21.7-15.765h26.822
+        l8.288-25.509l8.288,25.509h26.822L212.039,130.317z M212.039,55.743l8.289,25.509l-21.699-15.765L176.93,81.252l8.289-25.509
+        l-21.7-15.765h26.822l8.288-25.509l8.288,25.509h26.822L212.039,55.743z"/>
+      <g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
+      <%= link "English", to: Routes.user_settings_path(@conn, :update_locale, "en"), class: "dropdown-item" %>
       </span>
 
       <div class="dropdown-divide"></div>
-      <%= link "Desconectar", to: Routes.user_session_path(@conn, :delete), method: :delete, class: "dropdown-item text-red-600" %>
+      <%= link gettext("Log out"), to: Routes.user_session_path(@conn, :delete), method: :delete, class: "dropdown-item text-red-600" %>
     </div>
   </div>
 
 <% else %>
-  <%= link "Conectar", to: Routes.user_session_path(@conn, :new), class: "btn btn-sm btn-link" %>
-  <%= link "Criar conta", to: Routes.user_registration_path(@conn, :new), class: "btn btn-sm btn-primary" %>
+  <%= link gettext("Log in"), to: Routes.user_session_path(@conn, :new), class: "btn btn-sm btn-link" %>
+  <%= link gettext("Register"), to: Routes.user_registration_path(@conn, :new), class: "btn btn-sm btn-primary" %>
 <% end %>

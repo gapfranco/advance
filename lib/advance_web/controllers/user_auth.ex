@@ -4,6 +4,7 @@ defmodule AdvanceWeb.UserAuth do
 
   alias Advance.Accounts
   alias AdvanceWeb.Router.Helpers, as: Routes
+  import AdvanceWeb.Gettext
 
   # Make the remember me cookie valid for 60 days.
   # If you want bump or reduce this value, also change
@@ -28,10 +29,19 @@ defmodule AdvanceWeb.UserAuth do
     token = Accounts.generate_user_session_token(user)
     user_return_to = get_session(conn, :user_return_to)
 
+    locale =
+      case get_session(conn, :locale) do
+        nil -> "en"
+        result -> result
+      end
+
+    Gettext.put_locale(AdvanceWeb.Gettext, locale)
+
     conn
     |> renew_session()
     |> put_session(:user_token, token)
     |> put_session(:live_socket_id, "users_sessions:#{Base.url_encode64(token)}")
+    |> put_session(:locale, locale)
     |> maybe_write_remember_me_cookie(token, params)
     |> redirect(to: user_return_to || signed_in_path(conn))
   end
@@ -60,9 +70,12 @@ defmodule AdvanceWeb.UserAuth do
   #     end
   #
   defp renew_session(conn) do
+    preferred_locale = get_session(conn, :locale)
+
     conn
     |> configure_session(renew: true)
     |> clear_session()
+    |> put_session(:locale, preferred_locale)
   end
 
   @doc """
@@ -133,7 +146,7 @@ defmodule AdvanceWeb.UserAuth do
       conn
     else
       conn
-      |> put_flash(:error, "Precisa estar conectado para acessar esta página.")
+      |> put_flash(:error, gettext("You must log in to access this page."))
       |> maybe_store_return_to()
       |> redirect(to: Routes.user_session_path(conn, :new))
       |> halt()

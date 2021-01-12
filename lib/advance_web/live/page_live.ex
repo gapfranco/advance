@@ -1,7 +1,13 @@
 defmodule AdvanceWeb.PageLive do
   use AdvanceWeb, :live_view
+  import AdvanceWeb.Gettext
 
   @impl true
+  def mount(_params, %{"locale" => locale}, socket) do
+    Gettext.put_locale(AdvanceWeb.Gettext, locale)
+    {:ok, assign(socket, query: "", results: %{})}
+  end
+
   def mount(_params, _session, socket) do
     {:ok, assign(socket, query: "", results: %{})}
   end

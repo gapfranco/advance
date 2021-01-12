@@ -1,6 +1,6 @@
 defmodule AdvanceWeb.UserConfirmationController do
   use AdvanceWeb, :controller
-
+  import AdvanceWeb.Gettext
   alias Advance.Accounts
 
   def new(conn, _params) do
@@ -19,7 +19,10 @@ defmodule AdvanceWeb.UserConfirmationController do
     conn
     |> put_flash(
       :info,
-      "Se o seu e-mail estiver em nosso sistema e não estiver confirmado ainda, vai receber um e-mail com instruções em breve"
+      gettext(
+        "If your email is in our system and it has not been confirmed yet, " <>
+          "you will receive an email with instructions shortly."
+      )
     )
     |> redirect(to: "/")
   end
@@ -30,7 +33,7 @@ defmodule AdvanceWeb.UserConfirmationController do
     case Accounts.confirm_user(token) do
       {:ok, _} ->
         conn
-        |> put_flash(:info, "Conta foi confirmada com sucesso.")
+        |> put_flash(:info, gettext("Account confirmed successfully."))
         |> redirect(to: "/")
 
       :error ->
@@ -44,7 +47,10 @@ defmodule AdvanceWeb.UserConfirmationController do
 
           %{} ->
             conn
-            |> put_flash(:error, "Link de confirmação inválido ou já expirado.")
+            |> put_flash(
+              :error,
+              gettext("Account confirmation link is invalid or it has expired.")
+            )
             |> redirect(to: "/")
         end
     end

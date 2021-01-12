@@ -10,6 +10,8 @@ use Mix.Config
 config :advance,
   ecto_repos: [Advance.Repo]
 
+config :advance, AdvanceWeb.Gettext, default_locale: "en", locales: ~w(en pt_BR)
+
 # Configures the endpoint
 config :advance, AdvanceWeb.Endpoint,
   url: [host: "localhost"],

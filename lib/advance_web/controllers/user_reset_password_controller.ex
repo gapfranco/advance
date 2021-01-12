@@ -1,5 +1,6 @@
 defmodule AdvanceWeb.UserResetPasswordController do
   use AdvanceWeb, :controller
+  import AdvanceWeb.Gettext
 
   alias Advance.Accounts
 
@@ -21,7 +22,9 @@ defmodule AdvanceWeb.UserResetPasswordController do
     conn
     |> put_flash(
       :info,
-      "Se o seu email estiver no sistema, em breve vai receber instrução de como reiniciar sua senha."
+      gettext(
+        "If your email is in our system, you will receive instructions to reset your password shortly."
+      )
     )
     |> redirect(to: "/")
   end
@@ -36,7 +39,7 @@ defmodule AdvanceWeb.UserResetPasswordController do
     case Accounts.reset_user_password(conn.assigns.user, user_params) do
       {:ok, _} ->
         conn
-        |> put_flash(:info, "Senha alterada com sucesso.")
+        |> put_flash(:info, gettext("Password reset successfully."))
         |> redirect(to: Routes.user_session_path(conn, :new))
 
       {:error, changeset} ->
@@ -51,7 +54,7 @@ defmodule AdvanceWeb.UserResetPasswordController do
       conn |> assign(:user, user) |> assign(:token, token)
     else
       conn
-      |> put_flash(:error, "Link de alteração da senha é inválido ou expirou.")
+      |> put_flash(:error, gettext("Reset password link is invalid or it has expired."))
       |> redirect(to: "/")
       |> halt()
     end

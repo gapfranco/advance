@@ -21,5 +21,4 @@ config :advance, AdvanceWeb.Endpoint,
 # Print only warnings and errors during test
 config :logger, level: :warn
 
-config :advance, Advance.Mailer,
-  adapter: Bamboo.TestAdapter
+config :advance, Advance.Mailer, adapter: Bamboo.TestAdapter

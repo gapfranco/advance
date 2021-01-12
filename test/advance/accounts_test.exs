@@ -48,11 +48,12 @@ defmodule Advance.AccountsTest do
   end
 
   describe "register_user/1" do
-    test "requires email and password to be set" do
+    test "requires email, name and password to be set" do
       {:error, changeset} = Accounts.register_user(%{})
 
       assert %{
                password: ["can't be blank"],
+               name: ["can't be blank"],
                email: ["can't be blank"]
              } = errors_on(changeset)
     end
@@ -85,7 +86,15 @@ defmodule Advance.AccountsTest do
 
     test "registers users with a hashed password" do
       email = unique_user_email()
-      {:ok, user} = Accounts.register_user(%{email: email, password: valid_user_password()})
+      name = valid_name()
+
+      {:ok, user} =
+        Accounts.register_user(%{
+          email: email,
+          password: valid_user_password(),
+          name: valid_name()
+        })
+
       assert user.email == email
       assert is_binary(user.hashed_password)
       assert is_nil(user.confirmed_at)
@@ -96,19 +105,25 @@ defmodule Advance.AccountsTest do
   describe "change_user_registration/2" do
     test "returns a changeset" do
       assert %Ecto.Changeset{} = changeset = Accounts.change_user_registration(%User{})
-      assert changeset.required == [:password, :email]
+      assert changeset.required == [:password, :email, :name]
     end
 
     test "allows fields to be set" do
       email = unique_user_email()
       password = valid_user_password()
+      name = valid_name()
 
       changeset =
-        Accounts.change_user_registration(%User{}, %{"email" => email, "password" => password})
+        Accounts.change_user_registration(%User{}, %{
+          "email" => email,
+          "password" => password,
+          "name" => name
+        })
 
       assert changeset.valid?
       assert get_change(changeset, :email) == email
       assert get_change(changeset, :password) == password
+      assert get_change(changeset, :name) == name
       assert is_nil(get_change(changeset, :hashed_password))
     end
   end
@@ -263,7 +278,7 @@ defmodule Advance.AccountsTest do
         })
 
       assert %{
-               password: ["should be at least 12 character(s)"],
+               password: ["should be at least 6 character(s)"],
                password_confirmation: ["does not match password"]
              } = errors_on(changeset)
     end

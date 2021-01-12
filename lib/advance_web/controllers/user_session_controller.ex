@@ -1,5 +1,6 @@
 defmodule AdvanceWeb.UserSessionController do
   use AdvanceWeb, :controller
+  import AdvanceWeb.Gettext
 
   alias Advance.Accounts
   alias AdvanceWeb.UserAuth
@@ -8,16 +9,6 @@ defmodule AdvanceWeb.UserSessionController do
     render(conn, "new.html", error_message: nil)
   end
 
-  # def create(conn, %{"user" => user_params}) do
-  #   %{"email" => email, "password" => password} = user_params
-
-  #   if user = Accounts.get_user_by_email_and_password(email, password) do
-  #     UserAuth.log_in_user(conn, user, user_params)
-  #   else
-  #     render(conn, "new.html", error_message: "Invalid email or password")
-  #   end
-  # end
-
   def create(conn, %{"user" => user_params}) do
     %{"email" => email, "password" => password} = user_params
 
@@ -25,11 +16,11 @@ defmodule AdvanceWeb.UserSessionController do
       UserAuth.log_in_user(conn, user, user_params)
     else
       {:error, :bad_username_or_password} ->
-        render(conn, "new.html", error_message: "E-mail ou senha inválidos.")
+        render(conn, "new.html", error_message: gettext("Invalid email or password"))
 
       {:error, :user_blocked} ->
         render(conn, "new.html",
-          error_message: "Sua conta foi bloqueada, por favor contacte o administrador."
+          error_message: gettext("Your account is blocked. Please contact system administrator.")
         )
 
       {:error, :not_confirmed} ->
@@ -42,14 +33,16 @@ defmodule AdvanceWeb.UserSessionController do
 
         render(conn, "new.html",
           error_message:
-            "Por favor confirma seu e-mail antes de conectar. Um e-mail de confirmação foi enviado para você."
+            gettext(
+              "Please confirme your e-mail before connecting. A confirmation email was sent to you."
+            )
         )
     end
   end
 
   def delete(conn, _params) do
     conn
-    |> put_flash(:info, "Desconectado com sucesso.")
+    |> put_flash(:info, gettext("Logged out successfully."))
     |> UserAuth.log_out_user()
   end
 end

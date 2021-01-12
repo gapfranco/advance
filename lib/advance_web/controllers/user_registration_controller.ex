@@ -1,5 +1,6 @@
 defmodule AdvanceWeb.UserRegistrationController do
   use AdvanceWeb, :controller
+  import AdvanceWeb.Gettext
 
   alias Advance.Accounts
   alias Advance.Accounts.User
@@ -22,7 +23,7 @@ defmodule AdvanceWeb.UserRegistrationController do
         conn
         |> put_flash(
           :info,
-          "Conta criada com sucesso. Verifique seu e-mail para instruções de confirmação."
+          gettext("User created successfully.")
         )
         # |> UserAuth.log_in_user(user)
         |> redirect(to: Routes.user_session_path(conn, :new))

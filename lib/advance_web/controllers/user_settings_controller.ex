@@ -1,5 +1,6 @@
 defmodule AdvanceWeb.UserSettingsController do
   use AdvanceWeb, :controller
+  import AdvanceWeb.Gettext
 
   alias Advance.Accounts
   alias AdvanceWeb.UserAuth
@@ -25,7 +26,7 @@ defmodule AdvanceWeb.UserSettingsController do
         conn
         |> put_flash(
           :info,
-          "A link to confirm your email change has been sent to the new address."
+          gettext("A link to confirm your email change has been sent to the new address.")
         )
         |> redirect(to: Routes.page_path(conn, :index))
 
@@ -42,7 +43,7 @@ defmodule AdvanceWeb.UserSettingsController do
     case Accounts.update_user_profile(user, user_params) do
       {:ok, _user} ->
         conn
-        |> put_flash(:info, "Perfil alterado com sucesso.")
+        |> put_flash(:info, gettext("Profile updated successfully."))
         |> redirect(to: Routes.page_path(conn, :index))
 
       {:error, changeset} ->
@@ -61,7 +62,7 @@ defmodule AdvanceWeb.UserSettingsController do
     case Accounts.update_user_password(user, password, user_params) do
       {:ok, user} ->
         conn
-        |> put_flash(:info, "Senha alterada com sucesso.")
+        |> put_flash(:info, gettext("Password updated successfully."))
         |> put_session(:user_return_to, Routes.page_path(conn, :index))
         |> UserAuth.log_in_user(user)
 
@@ -78,14 +79,14 @@ defmodule AdvanceWeb.UserSettingsController do
     case Accounts.update_user_email(conn.assigns.current_user, token) do
       :ok ->
         conn
-        |> put_flash(:info, "E-mail alterado com sucesso.")
+        |> put_flash(:info, gettext("Email changed successfully."))
         |> redirect(to: Routes.page_path(conn, :index))
 
       # |> redirect(to: Routes.user_settings_path(conn, :edit))
 
       :error ->
         conn
-        |> put_flash(:error, "Link de mudança de e-mail é inválido ou expirou.")
+        |> put_flash(:error, gettext("Email change link is invalid or it has expired."))
         |> redirect(to: Routes.user_settings_path(conn, :edit))
     end
   end
@@ -96,7 +97,7 @@ defmodule AdvanceWeb.UserSettingsController do
     case Accounts.update_user_avatar(user, user_params) do
       {:ok, _user} ->
         conn
-        |> put_flash(:info, "Avatar alterado com sucesso.")
+        |> put_flash(:info, gettext("Avatar updated successfully."))
         |> redirect(to: Routes.page_path(conn, :index))
 
       {:error, changeset} ->
@@ -106,6 +107,14 @@ defmodule AdvanceWeb.UserSettingsController do
 
   def update_avatar(conn, _params) do
     render(conn, "update_avatar.html")
+  end
+
+  def update_locale(conn, %{"locale" => locale}) do
+    Gettext.put_locale(AdvanceWeb.Gettext, locale)
+
+    conn
+    |> put_session(:locale, locale)
+    |> redirect(to: Routes.page_path(conn, :index))
   end
 
   defp assign_email_and_password_changesets(conn, _opts) do

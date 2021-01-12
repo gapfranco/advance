@@ -1,15 +1,15 @@
-<h1>Reenviar instruções de confirmação</h1>
+<h1>%<= gettext("Resend confirmation instructions") %></h1>
 
 <%= form_for :user, Routes.user_confirmation_path(@conn, :create), fn f -> %>
   <%= label f, :email, "E-Mail" %>
   <%= text_input f, :email, required: true %>
 
   <div>
-    <%= submit "Reenviar instruções de confirmação" %>
+    <%= submit gettext("Resend confirmation instructions") %>
   </div>
 <% end %>
 
 <p>
-  <%= link "Criar conta", to: Routes.user_registration_path(@conn, :new) %> |
-  <%= link "Conectar", to: Routes.user_session_path(@conn, :new) %>
+  <%= link gettext("Register"), to: Routes.user_registration_path(@conn, :new) %> |
+  <%= link gettext("Log in"), to: Routes.user_session_path(@conn, :new) %>
 </p>

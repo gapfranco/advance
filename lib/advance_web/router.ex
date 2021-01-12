@@ -6,6 +6,7 @@ defmodule AdvanceWeb.Router do
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
+    plug :set_session_locale
     plug :fetch_live_flash
     plug :put_root_layout, {AdvanceWeb.LayoutView, :root}
     plug :protect_from_forgery
@@ -71,6 +72,7 @@ defmodule AdvanceWeb.Router do
     put "/users/settings/update_avatar", UserSettingsController, :update_avatar
     get "/users/settings/update_profile", UserSettingsController, :update_profile
     put "/users/settings/update_profile", UserSettingsController, :update_profile
+    get "/users/settings/update_locale/:locale", UserSettingsController, :update_locale
   end
 
   scope "/", AdvanceWeb do
@@ -80,6 +82,13 @@ defmodule AdvanceWeb.Router do
     get "/users/confirm", UserConfirmationController, :new
     post "/users/confirm", UserConfirmationController, :create
     get "/users/confirm/:token", UserConfirmationController, :confirm
+  end
+
+  defp set_session_locale(conn, _opts) do
+    locale = get_session(conn, :locale)
+    Gettext.put_locale(AdvanceWeb.Gettext, locale)
+
+    conn
   end
 
   # if Mix.env == :dev do

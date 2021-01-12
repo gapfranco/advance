@@ -1,0 +1,261 @@
+## "msgid"s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove "msgid"s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use "mix gettext.extract --merge" or "mix gettext.merge"
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2\n"
+
+#, elixir-format
+#: lib/advance_web/templates/layout/_user_menu.html.eex:27
+msgid "Change avatar"
+msgstr "Mudar avatar"
+
+#, elixir-format
+#: lib/advance_web/templates/layout/_user_menu.html.eex:29
+#: lib/advance_web/templates/user_settings/edit.html.eex:5 lib/advance_web/templates/user_settings/edit.html.eex:31
+msgid "Change e-mail"
+msgstr "Mudar e-mail"
+
+#, elixir-format
+#: lib/advance_web/templates/layout/_user_menu.html.eex:24
+#: lib/advance_web/templates/user_settings/update_password.html.eex:5 lib/advance_web/templates/user_settings/update_password.html.eex:36
+msgid "Change password"
+msgstr "Mudar senha"
+
+#, elixir-format
+#: lib/advance_web/templates/layout/_user_menu.html.eex:22
+msgid "Change profile"
+msgstr "Mudar perfil"
+
+#, elixir-format
+#: lib/advance_web/templates/layout/_user_menu.html.eex:38
+#: lib/advance_web/templates/user_confirmation/new.html.eex:14 lib/advance_web/templates/user_registration/new.html.eex:43
+#: lib/advance_web/templates/user_reset_password/edit.html.eex:32 lib/advance_web/templates/user_reset_password/new.html.eex:19
+#: lib/advance_web/templates/user_session/new.html.eex:1 lib/advance_web/templates/user_session/new.html.eex:25
+msgid "Log in"
+msgstr "Conectar"
+
+#, elixir-format
+#: lib/advance_web/templates/layout/_user_menu.html.eex:33
+msgid "Log out"
+msgstr "Desconectar"
+
+#, elixir-format
+#: lib/advance_web/templates/layout/_user_menu.html.eex:20
+#: lib/advance_web/templates/user_settings/update_profile.html.eex:5
+msgid "Profile"
+msgstr "Perfil"
+
+#, elixir-format
+#: lib/advance_web/templates/layout/_user_menu.html.eex:39
+#: lib/advance_web/templates/user_confirmation/new.html.eex:13 lib/advance_web/templates/user_registration/new.html.eex:34
+#: lib/advance_web/templates/user_reset_password/edit.html.eex:31 lib/advance_web/templates/user_reset_password/new.html.eex:18
+#: lib/advance_web/templates/user_session/new.html.eex:34
+msgid "Register"
+msgstr "Registrar-se"
+
+#, elixir-format
+#: lib/advance_web/controllers/user_settings_controller.ex:29
+msgid "A link to confirm your email change has been sent to the new address."
+msgstr "Um link para confirmar a mudança de email foi enviado para o novo endereço"
+
+#, elixir-format
+#: lib/advance_web/controllers/user_confirmation_controller.ex:52
+msgid "Account confirmation link is invalid or it has expired."
+msgstr "Link de confirmação da conta é inválido ou expirou."
+
+#, elixir-format
+#: lib/advance_web/controllers/user_confirmation_controller.ex:36
+msgid "Account confirmed successfully."
+msgstr "COnta confirmado com sucesso"
+
+#, elixir-format
+#: lib/advance_web/controllers/user_settings_controller.ex:100
+msgid "Avatar updated successfully."
+msgstr "Avatar atualizado com sucesso"
+
+#, elixir-format
+#: lib/advance_web/controllers/user_settings_controller.ex:89
+msgid "Email change link is invalid or it has expired."
+msgstr "Link de mudança de email é inválido ou expirou."
+
+#, elixir-format
+#: lib/advance_web/controllers/user_settings_controller.ex:82
+msgid "Email changed successfully."
+msgstr "Email alterado com sucesso."
+
+#, elixir-format
+#: lib/advance_web/controllers/user_confirmation_controller.ex:22
+msgid "If your email is in our system and it has not been confirmed yet, you will receive an email with instructions shortly."
+msgstr "Se seu email está no sistema e não foi confirmado ainda, você vai receber um email com instruções em breve."
+
+#, elixir-format
+#: lib/advance_web/controllers/user_reset_password_controller.ex:25
+msgid "If your email is in our system, you will receive instructions to reset your password shortly."
+msgstr "Se seu email está no sistema, voc^vai receber instruções para mudar sua senha em breve."
+
+#, elixir-format
+#: lib/advance_web/controllers/user_session_controller.ex:19
+msgid "Invalid email or password"
+msgstr "Email ou senha inválidos"
+
+#, elixir-format
+#: lib/advance_web/controllers/user_session_controller.ex:45
+msgid "Logged out successfully."
+msgstr "Desconectou-se com sucesso."
+
+#, elixir-format
+#: lib/advance_web/controllers/user_reset_password_controller.ex:42
+msgid "Password reset successfully."
+msgstr "Senha alterada com sucesso."
+
+#, elixir-format
+#: lib/advance_web/controllers/user_settings_controller.ex:65
+msgid "Password updated successfully."
+msgstr "Senha alterado com sucesso."
+
+#, elixir-format
+#: lib/advance_web/controllers/user_settings_controller.ex:46
+msgid "Profile updated successfully."
+msgstr "Perfil atualizado com sucesso"
+
+#, elixir-format
+#: lib/advance_web/controllers/user_reset_password_controller.ex:57
+msgid "Reset password link is invalid or it has expired."
+msgstr "Link de alteração de senha inválido ou expirou."
+
+#, elixir-format
+#: lib/advance_web/controllers/user_registration_controller.ex:26
+msgid "User created successfully."
+msgstr "Usuário criado com sucesso."
+
+#, elixir-format
+#: lib/advance_web/controllers/user_auth.ex:144
+msgid "You must log in to access this page."
+msgstr "Precisa estar conectado para acessar esta página."
+
+#, elixir-format
+#: lib/advance_web/controllers/user_session_controller.ex:23
+msgid "Your account is blocked. Please contact system administrator."
+msgstr "Sua conta está bloqueada. Por favor, contacte o administrador."
+
+#, elixir-format
+#: lib/advance_web/live/page_live.html.leex:7
+msgid "Advancing in content management and information exchange"
+msgstr "Um avanço na gestão de conteúdo e troca de informações"
+
+#, elixir-format
+#: lib/advance_web/controllers/user_session_controller.ex:36
+msgid "Please confirme your e-mail before connecting. A confirmation email was sent to you."
+msgstr "Por favor informe seu email antes de conectar. Um email de confirmação será enviado."
+
+#, elixir-format
+#: lib/advance_web/live/page_live.html.leex:4
+msgid "Welcome to Advance"
+msgstr "Bem vindo ao Advance"
+
+#, elixir-format
+#: lib/advance_web/templates/user_registration/new.html.eex:39
+#: lib/advance_web/templates/user_session/new.html.eex:30
+msgid "Already have an account?"
+msgstr "Já tem uma conta?"
+
+#, elixir-format
+#: lib/advance_web/templates/user_settings/update_avatar.html.eex:5
+msgid "Avatar"
+msgstr "Avatar"
+
+#, elixir-format
+#: lib/advance_web/templates/user_reset_password/edit.html.eex:16
+msgid "Confirm new password"
+msgstr "Confirma a nova senha"
+
+#, elixir-format
+#: lib/advance_web/templates/user_settings/edit.html.eex:25
+#: lib/advance_web/templates/user_settings/update_password.html.eex:18
+msgid "Current password"
+msgstr "Senha atual"
+
+#, elixir-format
+#: lib/advance_web/templates/user_registration/new.html.eex:44
+#: lib/advance_web/templates/user_reset_password/new.html.eex:1 lib/advance_web/templates/user_session/new.html.eex:35
+msgid "Forgot your password?"
+msgstr "Esqueceu sua senha?"
+
+#, elixir-format
+#: lib/advance_web/templates/user_reset_password/edit.html.eex:27
+#: lib/advance_web/templates/user_reset_password/new.html.eex:14
+msgid "I do rememebr my password"
+msgstr "Me lembrei da minha senha"
+
+#, elixir-format
+#: lib/advance_web/templates/user_settings/update_avatar.html.eex:22
+msgid "Image file (.jpeg .jpg .gif .png) up to 100KB"
+msgstr "Arquivo de imagem (.jpeg .jpg .gif .png) até 100KB"
+
+#, elixir-format
+#: lib/advance_web/templates/user_session/new.html.eex:21
+msgid "Keep me logged in for 60 days"
+msgstr "Mantenha-em conectado por 60 dias"
+
+#, elixir-format
+#: lib/advance_web/templates/user_registration/new.html.eex:16
+#: lib/advance_web/templates/user_settings/update_profile.html.eex:19
+msgid "Name"
+msgstr "Nome"
+
+#, elixir-format
+#: lib/advance_web/templates/user_reset_password/edit.html.eex:10
+#: lib/advance_web/templates/user_settings/update_password.html.eex:24
+msgid "New password"
+msgstr "Nova senha"
+
+#, elixir-format
+#: lib/advance_web/templates/user_registration/new.html.eex:5
+#: lib/advance_web/templates/user_reset_password/edit.html.eex:5 lib/advance_web/templates/user_settings/update_password.html.eex:12
+#: lib/advance_web/templates/user_settings/update_profile.html.eex:12
+msgid "Oops, something went wrong! Please check the errors below."
+msgstr "Ocorreu um erro! Por favor verifique os erros abaixo"
+
+#, elixir-format
+#: lib/advance_web/templates/user_registration/new.html.eex:22
+#: lib/advance_web/templates/user_session/new.html.eex:15
+msgid "Password"
+msgstr "Senha"
+
+#, elixir-format
+#: lib/advance_web/templates/user_registration/new.html.eex:28
+#: lib/advance_web/templates/user_settings/update_password.html.eex:30
+msgid "Password confirmation"
+msgstr "Confirmação da senha"
+
+#, elixir-format
+#: lib/advance_web/templates/user_confirmation/new.html.eex:8
+msgid "Resend confirmation instructions"
+msgstr "Reenviar instruções de confirmação"
+
+#, elixir-format
+#: lib/advance_web/templates/user_reset_password/edit.html.eex:22
+msgid "Reset password"
+msgstr "Recriar senha"
+
+#, elixir-format
+#: lib/advance_web/templates/user_settings/update_profile.html.eex:25
+msgid "Save profile"
+msgstr "Salvar perfil"
+
+#, elixir-format
+#: lib/advance_web/templates/user_reset_password/new.html.eex:9
+msgid "Send password reset instructions"
+msgstr "Enviar instrução para criar senha"
+
+#, elixir-format
+#: lib/advance_web/templates/user_settings/update_avatar.html.eex:25
+msgid "Update Avatar"
+msgstr "Atualiza Avatar"
