@@ -33,7 +33,7 @@ msgid "Change profile"
 msgstr ""
 
 #, elixir-format
-#: lib/advance_web/templates/layout/_user_menu.html.eex:38
+#: lib/advance_web/templates/layout/_user_menu.html.eex:60
 #: lib/advance_web/templates/user_confirmation/new.html.eex:14 lib/advance_web/templates/user_registration/new.html.eex:43
 #: lib/advance_web/templates/user_reset_password/edit.html.eex:32 lib/advance_web/templates/user_reset_password/new.html.eex:19
 #: lib/advance_web/templates/user_session/new.html.eex:1 lib/advance_web/templates/user_session/new.html.eex:25
@@ -41,7 +41,7 @@ msgid "Log in"
 msgstr ""
 
 #, elixir-format
-#: lib/advance_web/templates/layout/_user_menu.html.eex:33
+#: lib/advance_web/templates/layout/_user_menu.html.eex:55
 msgid "Log out"
 msgstr ""
 
@@ -52,12 +52,12 @@ msgid "Profile"
 msgstr ""
 
 #, elixir-format
-#: lib/advance_web/templates/layout/_user_menu.html.eex:39
-#: lib/advance_web/templates/user_confirmation/new.html.eex:13 lib/advance_web/templates/user_registration/new.html.eex:34
-#: lib/advance_web/templates/user_reset_password/edit.html.eex:31 lib/advance_web/templates/user_reset_password/new.html.eex:18
-#: lib/advance_web/templates/user_session/new.html.eex:34
+#: lib/advance_web/templates/layout/_user_menu.html.eex:61
+#: lib/advance_web/templates/user_confirmation/new.html.eex:13 lib/advance_web/templates/user_registration/new.html.eex:1
+#: lib/advance_web/templates/user_registration/new.html.eex:34 lib/advance_web/templates/user_reset_password/edit.html.eex:31
+#: lib/advance_web/templates/user_reset_password/new.html.eex:18 lib/advance_web/templates/user_session/new.html.eex:34
 msgid "Register"
-msgstr "Registrar-se"
+msgstr ""
 
 #, elixir-format
 #: lib/advance_web/controllers/user_settings_controller.ex:29
@@ -135,7 +135,7 @@ msgid "User created successfully."
 msgstr ""
 
 #, elixir-format
-#: lib/advance_web/controllers/user_auth.ex:144
+#: lib/advance_web/controllers/user_auth.ex:148
 msgid "You must log in to access this page."
 msgstr ""
 
@@ -260,6 +260,36 @@ msgid "Update Avatar"
 msgstr ""
 
 #, elixir-format
-#: lib/advance_web/templates/user_registration/new.html.eex:1
-msgid "Criar conta"
+#: lib/advance_web/templates/layout/_user_menu.html.eex:32
+msgid "Locale"
+msgstr ""
+
+#, elixir-format
+#: lib/advance/accounts/user.ex:123
+msgid "did not change"
+msgstr ""
+
+#, elixir-format
+#: lib/advance/accounts/user.ex:49
+msgid "does not match confirmation"
+msgstr ""
+
+#, elixir-format
+#: lib/advance/accounts/user.ex:142
+msgid "does not match password"
+msgstr ""
+
+#, elixir-format
+#: lib/advance/accounts/user.ex:187
+msgid "is not valid"
+msgstr ""
+
+#, elixir-format
+#: lib/advance/accounts/user.ex:68
+msgid "must have the @ sign and no spaces"
+msgstr ""
+
+#, elixir-format
+#: lib/advance/accounts/user.ex:81
+msgid "should have 6 to 80 character(s)"
 msgstr ""

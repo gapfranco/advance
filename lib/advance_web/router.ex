@@ -85,7 +85,11 @@ defmodule AdvanceWeb.Router do
   end
 
   defp set_session_locale(conn, _opts) do
-    locale = get_session(conn, :locale)
+    locale =
+      case get_session(conn, :locale) do
+        nil -> "en"
+        result -> result
+      end
     Gettext.put_locale(AdvanceWeb.Gettext, locale)
 
     conn

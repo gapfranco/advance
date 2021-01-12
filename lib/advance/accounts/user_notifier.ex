@@ -5,17 +5,17 @@ defmodule Advance.Accounts.UserNotifier do
   @from_address "app@m2isrv.com"
 
   defp deliver(to, subject, text_body, html_body) do
-    email =
-      new_email(
-        to: to,
-        from: @from_address,
-        subject: subject,
-        text_body: text_body,
-        html_body: html_body
-      )
-      |> Mailer.deliver_now()
+    # email =
+    new_email(
+      to: to,
+      from: @from_address,
+      subject: subject,
+      text_body: text_body,
+      html_body: html_body
+    )
+    |> Mailer.deliver_now()
 
-    {:ok, email}
+    {:ok, %{to: to, body: text_body}}
   end
 
   @doc """

@@ -13,7 +13,7 @@ defmodule AdvanceWeb.UserResetPasswordControllerTest do
     test "renders the reset password page", %{conn: conn} do
       conn = get(conn, Routes.user_reset_password_path(conn, :new))
       response = html_response(conn, 200)
-      assert response =~ "Forgot your password?</h5>"
+      assert response =~ "Forgot your password?"
     end
   end
 
@@ -54,7 +54,7 @@ defmodule AdvanceWeb.UserResetPasswordControllerTest do
 
     test "renders reset password", %{conn: conn, token: token} do
       conn = get(conn, Routes.user_reset_password_path(conn, :edit, token))
-      assert html_response(conn, 200) =~ "Reset Password</h5>"
+      assert html_response(conn, 200) =~ "Reset Password"
     end
 
     test "does not render reset password with invalid token", %{conn: conn} do
@@ -93,14 +93,14 @@ defmodule AdvanceWeb.UserResetPasswordControllerTest do
       conn =
         put(conn, Routes.user_reset_password_path(conn, :update, token), %{
           "user" => %{
-            "password" => "too short",
+            "password" => "123",
             "password_confirmation" => "does not match"
           }
         })
 
       response = html_response(conn, 200)
-      assert response =~ "Reset Password</h5>"
-      assert response =~ "should be at least 12 character(s)"
+      assert response =~ "Reset Password"
+      assert response =~ "should have 6 to 80 character(s)"
       assert response =~ "does not match password"
     end
 
