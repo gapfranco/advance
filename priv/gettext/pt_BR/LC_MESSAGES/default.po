@@ -98,7 +98,7 @@ msgstr "Se seu email está no sistema e não foi confirmado ainda, você vai rec
 #, elixir-format
 #: lib/advance_web/controllers/user_reset_password_controller.ex:25
 msgid "If your email is in our system, you will receive instructions to reset your password shortly."
-msgstr "Se seu email está no sistema, voc^vai receber instruções para mudar sua senha em breve."
+msgstr "Se seu email está no sistema, você vai receber instruções para mudar sua senha em breve."
 
 #, elixir-format
 #: lib/advance_web/controllers/user_session_controller.ex:19
@@ -294,3 +294,18 @@ msgstr "formato inválido de email"
 #: lib/advance/accounts/user.ex:81
 msgid "should have 6 to 80 character(s)"
 msgstr "deve ter de 6 a 80 caracteres"
+
+#, elixir-format
+#: lib/advance/accounts/user_notifier.ex:157
+msgid "Password reset instructions"
+msgstr "Instruções para criar senha"
+
+#, elixir-format
+#: lib/advance/accounts/user_notifier.ex:88
+msgid "Please confirm your account"
+msgstr "Por favor confirme a sua conta"
+
+#, elixir-format
+#: lib/advance/accounts/user_notifier.ex:226
+msgid "Email change instructions"
+msgstr "Instruções para mudar email"

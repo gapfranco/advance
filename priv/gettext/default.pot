@@ -293,3 +293,18 @@ msgstr ""
 #: lib/advance/accounts/user.ex:81
 msgid "should have 6 to 80 character(s)"
 msgstr ""
+
+#, elixir-format
+#: lib/advance/accounts/user_notifier.ex:157
+msgid "Password reset instructions"
+msgstr ""
+
+#, elixir-format
+#: lib/advance/accounts/user_notifier.ex:88
+msgid "Please confirm your account"
+msgstr ""
+
+#, elixir-format
+#: lib/advance/accounts/user_notifier.ex:226
+msgid "Email change instructions"
+msgstr ""
