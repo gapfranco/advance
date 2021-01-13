@@ -519,4 +519,38 @@ defmodule Advance.AccountsTest do
   #     refute inspect(%User{password: "123456"}) =~ "password: \"123456\""
   #   end
   # end
+
+  describe "change_user_profile/2" do
+    test "returns a profile changeset" do
+      assert %Ecto.Changeset{} = changeset = Accounts.change_user_profile(%User{})
+      assert changeset.required == [:name]
+    end
+  end
+
+  describe "update_user_profile/3" do
+    setup do
+      %{user: user_fixture()}
+    end
+
+    test "validates valid name", %{user: user} do
+      {:error, changeset} =
+        Accounts.update_user_profile(user, %{
+          name: ""
+        })
+
+      assert %{
+               name: ["can't be blank"]
+             } = errors_on(changeset)
+    end
+
+    test "updates the name", %{user: user} do
+      {:ok, user} =
+        Accounts.update_user_profile(user, %{
+          name: "new name"
+        })
+
+      assert %User{name: "new name"} = Accounts.get_user_by_email(user.email)
+      # assert user.name == "new name"
+    end
+  end
 end
