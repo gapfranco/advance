@@ -16,6 +16,19 @@ defmodule AdvanceWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug AdvanceWeb.Context
+  end
+
+  scope "/" do
+    pipe_through :api
+
+    forward "/api", Absinthe.Plug, schema: AdvanceWeb.Schema
+
+    if Mix.env() == :dev do
+      forward "/graphiql", Absinthe.Plug.GraphiQL,
+        schema: AdvanceWeb.Schema,
+        socket: AdvanceWeb.UserSocket
+    end
   end
 
   scope "/", AdvanceWeb do
@@ -90,6 +103,7 @@ defmodule AdvanceWeb.Router do
         nil -> "en"
         result -> result
       end
+
     Gettext.put_locale(AdvanceWeb.Gettext, locale)
 
     conn

@@ -32,6 +32,10 @@ defmodule Advance.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      # Absinthe for GraphQL
+      {:absinthe, "~> 1.5.0"},
+      {:absinthe_plug, "~> 1.5.0"},
+
       # Bamboo for Emailing
       {:bamboo, "~> 1.5"},
       {:bamboo_smtp, "~> 2.1.0"},
@@ -48,6 +52,7 @@ defmodule Advance.MixProject do
       {:hackney, "~> 1.9"},
       {:sweet_xml, "~> 0.6"},
       {:bcrypt_elixir, "~> 2.0"},
+      {:guardian, "~> 2.0"},
       {:phx_gen_auth, "~> 0.6", only: [:dev], runtime: false},
       {:sobelow, "~> 0.8", only: :dev},
       {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
@@ -65,6 +70,7 @@ defmodule Advance.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:set_locale, "~> 0.2.1"},
+      {:dataloader, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"}
     ]
   end

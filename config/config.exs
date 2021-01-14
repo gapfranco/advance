@@ -28,6 +28,15 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+config :advance, Advance.Guardian,
+  issuer: "advance",
+  secret_key: "TjuVoYqyuY1rPcQ3PKMqmAf3shHw94E6VB2uuziyq5iXBphSpFCe9bTdDfSfO8kVhA8=",
+  ttl: {3, :days}
+
+config :advance, AdvanceWeb.AuthAccessPipeline,
+  module: Advance.Guardian,
+  error_handler: AdvanceWeb.AuthErrorHandler
+
 config :waffle,
   # or Waffle.Storage.Local
   storage: Waffle.Storage.S3,
