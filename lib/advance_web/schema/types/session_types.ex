@@ -23,4 +23,9 @@ defmodule AdvanceWeb.Schema.Types.SessionTypes do
     field(:email, :string)
     field(:is_blocked, :boolean)
   end
+
+  @desc "Message returned"
+  object :message_type do
+    field(:msg, :string)
+  end
 end

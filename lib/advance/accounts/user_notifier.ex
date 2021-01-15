@@ -158,6 +158,75 @@ defmodule Advance.Accounts.UserNotifier do
   end
 
   @doc """
+  Deliver instructions to reset password account.
+  """
+  def deliver_reset_password_instructions_api(user, token) do
+    locale = Gettext.get_locale(AdvanceWeb.Gettext)
+
+    text_body =
+      cond do
+        locale == "en" ->
+          """
+
+          ==============================
+
+          Reset password
+
+          #{user.name},
+
+          You can reset your password by using the token below:
+
+          #{token}
+
+          If you didn't request this change, please ignore this.
+
+          ==============================
+          """
+
+        true ->
+          """
+
+          ==============================
+
+          Recriar senha
+
+          #{user.name},
+
+          Você pode recriar sua senha usando o código abaixo:
+
+          #{token}
+
+          Se você não solicitou a mudança, por favor ignore isso.
+
+          ==============================
+          """
+      end
+
+    html_body =
+      cond do
+        locale == "en" ->
+          """
+          <h2>Reset password</h2>
+          <p>#{user.name},</p><br/></br/>
+          You can reset your password by using the token below:<br/></br/>
+          #{token}<br/></br/>
+          If you didn't request this change, please ignore this.
+          """
+
+        true ->
+          """
+          <h2>Recriar senha</h2>
+          <p>#{user.name},</p><br/></br/>
+          Você pode recriar as sua senha usando o código abaixo:<br/></br/>
+          #{token}<br/></br/>
+          Se você não solicitou a mudança, por favor ignore isso.
+          """
+      end
+
+    deliver(user.email, gettext("Password reset instructions"), text_body, html_body)
+  end
+
+  @doc """
   Deliver instructions to update your e-mail.
   """
   def deliver_update_email_instructions(user, url) do

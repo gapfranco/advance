@@ -340,6 +340,13 @@ defmodule Advance.Accounts do
     UserNotifier.deliver_reset_password_instructions(user, reset_password_url_fun.(encoded_token))
   end
 
+  def deliver_user_reset_password_instructions(%User{} = user, token)
+      when is_binary(token) do
+    {encoded_token, user_token} = UserToken.build_email_token(user, "reset_password")
+    Repo.insert!(user_token)
+    UserNotifier.deliver_reset_password_instructions_api(user, encoded_token)
+  end
+
   @doc """
   Gets the user by reset password token.
 
