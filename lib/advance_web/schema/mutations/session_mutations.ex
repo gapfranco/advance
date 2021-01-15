@@ -12,11 +12,13 @@ defmodule AdvanceWeb.Schema.Mutations.SessionMutations do
       resolve(&Resolvers.SessionResolvers.login_user/3)
     end
 
-    # @desc "Create new client and user"
-    # field :signup, type: :signup_type do
-    #   arg(:input, non_null(:signup_input_type))
-    #   resolve(&Resolvers.SessionResolvers.signup_user/3)
-    # end
+    @desc "SignUp a new user"
+    field :signup, type: :user_type do
+      arg(:email, non_null(:string))
+      arg(:name, non_null(:string))
+      arg(:password, non_null(:string))
+      resolve(&Resolvers.SessionResolvers.signup_user/3)
+    end
 
     # @desc "Forgot password - send e-mail to reset"
     # field :forgot_password, type: :message_type do
