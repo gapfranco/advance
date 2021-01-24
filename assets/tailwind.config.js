@@ -1,4 +1,5 @@
 module.exports = {
+
   purge: {
     enabled: process.env.MIX_ENV === "prod",
     content: [

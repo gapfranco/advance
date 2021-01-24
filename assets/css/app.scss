@@ -1,34 +1,11 @@
-@tailwind base;
-@tailwind components;
 @import "../node_modules/nprogress/nprogress.css";
 
-[hidden] {
-  @apply hidden;
-}
+@import "tailwindcss/base";
 
-.alert:empty {
-  @apply hidden;
-}
+@import "tailwindcss/components";
 
-.alert.toast {
-  @apply z-40 fixed top-0 right-0 w-64 mt-20 shadow-xl cursor-pointer text-sm ease-out duration-300;
-}
+@import "./custom.css";
 
-/* LiveView specific classes for your customizations */
-.phx-no-feedback.invalid-feedback, .phx-no-feedback .invalid-feedback {
-  display: none;
-}
+@import "./live_view.css";
 
-.phx-click-loading {
-  opacity: 0.5;
-  transition: opacity 1s ease-out;
-}
-
-.phx-disconnected{
-  cursor: wait;
-}
-.phx-disconnected *{
-  pointer-events: none;
-}
-
-@tailwind utilities;
+@import "tailwindcss/utilities";

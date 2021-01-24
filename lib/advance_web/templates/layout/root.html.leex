@@ -9,72 +9,90 @@
     <link phx-track-static rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/app.css") %>'/>
     <script defer phx-track-static type="text/javascript" src='<%= Routes.static_path(@conn, "/js/app.js") %>'></script>
   </head>
-  <body class="flex flex-col h-full pt-20 bg-gray-100">
-    <header class="fixed top-0 left-0 right-0 z-30 px-2 py-4 bg-white shadow sm:px-4">
-      <div class="containerxx flex items-center justify-between mx-4">
-        <a href="/" title="Advance Home Page" class="flex font-bold items-center text-2xl text-red-600">
-          Advance
-        </a>
-        <div class="flex items-center space-x-1">
-          <div class="hidden md:inline-flex space-x-1">
-            <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-              <%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "btn btn-sm btn-link" %>
+  <body class="flex flex-col h-full pt-0 bg-gray-100">
+
+    <!-- This example requires Tailwind CSS v2.0+ -->
+    <nav class="bg-white shadow" x-data="{ isOn: false }">
+      <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8" >
+        <div class="relative flex items-center justify-between h-16" >
+            <div class="absolute inset-y-0 left-0 flex items-center sm:hidden" >
+              <!-- Mobile menu button-->
+              <button @click="isOn = !isOn" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-expanded="false" @click="open = true">
+                <span class="sr-only">Open main menu</span>
+                <!-- Icon when menu is closed. -->
+                <!--
+                  Heroicon name: menu
+                  Menu open: "hidden", Menu closed: "block"
+                -->
+                <svg :class="{'block': !isOn, 'hidden': isOn }" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+                <!-- Icon when menu is open. -->
+                <!--
+                  Heroicon name: x
+                  Menu open: "block", Menu closed: "hidden"
+                -->
+                <svg :class="{'block': isOn, 'hidden': !isOn }" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+            <div class="sm:mr-16">
+              <a href="/" title="Advance Home Page" class="font-bold items-center text-2xl text-red-600">
+                Advance
+              </a>
+            </div>
+            <%= if @current_user do %>
+            <div class="hidden sm:block sm:ml-6" >
+              <div class="flex space-x-4">
+                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                <%= link "Categories", to: Routes.category_index_path(@conn, :index), class: "text-gray-500 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>
+                <a href="#" class="text-gray-500 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
+                <a href="#" class="text-gray-500 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Team</a>
+                <a href="#" class="text-gray-500 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Projects</a>
+                <a href="#" class="text-gray-500 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Calendar</a>
+                <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
+                  <%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "text-primary hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>
+                <% end %>
+    
+              </div>
+            </div>
             <% end %>
           </div>
-          <%= render "_user_menu.html", assigns %>
-          <div class="inline-flex md:hidden" x-data="{ open: false }">
-            <button class="flex-none px-2 btn btn-link btn-sm" @click="open = true">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-                >
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
-              </svg>
-              <span class="sr-only">Open Menu</span>
-            </button>
-            <div class="absolute top-0 left-0 right-0 z-50 flex flex-col p-2 pb-4 m-2 bg-white rounded shadow space-y-3" x-show.transition="open" @click.away="open = false" x-cloak>
-              <button class="self-end flex-none px-2 ml-2 btn btn-link btn-icon" @click="open = false">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                  >
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-                <span class="sr-only">Close Menu</span>
-              </button>
-              <%= link "Home", to: Routes.page_path(@conn, :index), class: "btn btn-link w-full" %>
-              <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-                <%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "btn btn-link w-full" %>
-              <% end %>
-            </div>
+          <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+            <!-- user profile menu -->
+            <%= render "_user_menu.html", assigns %>
           </div>
         </div>
       </div>
-    </header>
-    <%= @inner_content %>
-    <footer class="py-6 mt-auto text-gray-400 bg-gray-800 footer">
-      <div class="container max-w-6xl px-4 ">
-        <span class="text-muted">Advance</span>
+
+      <!--
+        Mobile menu, toggle classes based on menu state.
+        Menu open: "block", Menu closed: "hidden"
+      -->
+      <div :class="{'hidden': !isOn}" class="sm:hidden">
+        <div class="px-2 pt-2 pb-3 space-y-1">
+          <%= if @current_user do %>
+            <%= link "Categories", to: Routes.category_index_path(@conn, :index), class: "text-gray-500 block hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>
+            <a href="#" class="text-gray-500 hover:bg-gray-700 hover:text-white px-3 py-2 block rounded-md text-sm font-medium">Dashboard</a>
+            <a href="#" class="text-gray-500 hover:bg-gray-700 hover:text-white px-3 py-2 block rounded-md text-sm font-medium">Team</a>
+            <a href="#" class="text-gray-500 hover:bg-gray-700 hover:text-white px-3 py-2 block rounded-md text-sm font-medium">Projects</a>
+            <a href="#" class="text-gray-500 hover:bg-gray-700 hover:text-white px-3 py-2 block rounded-md text-sm font-medium">Calendar</a>
+            <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
+              <%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>
+            <% end %>
+          <% else %>
+            <%= link gettext("Log in"), to: Routes.user_session_path(@conn, :new), class: "text-gray-500 block hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>
+            <%= link gettext("Register"), to: Routes.user_registration_path(@conn, :new), class: "text-gray-500 block hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>
+          <% end %>
+        </div>
       </div>
-    </footer>
+
+    </nav>
+
+  </div>
+
+    <%= @inner_content %>
   </body>
 </html>

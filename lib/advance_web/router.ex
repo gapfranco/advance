@@ -35,6 +35,13 @@ defmodule AdvanceWeb.Router do
     pipe_through :browser
 
     live "/", PageLive, :index
+
+    live "/categories", CategoryLive.Index, :index
+    live "/categories/new", CategoryLive.Index, :new
+    live "/categories/:id/edit", CategoryLive.Index, :edit
+
+    live "/categories/:id", CategoryLive.Show, :show
+    live "/categories/:id/show/edit", CategoryLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.

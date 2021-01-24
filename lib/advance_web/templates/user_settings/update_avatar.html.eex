@@ -2,7 +2,7 @@
   <div class="w-full md:w-2/3 mt-4">
     <div class="shadow card">
       <div class="card-header">
-        <div class="font-semibold text-2xl text-primary"><%= gettext("Avatar") %></div>
+        <div class="font-semibold text-2xl text-gray-500"><%= gettext("Avatar") %></div>
       </div>
       <div class="card-body prose">
 
@@ -22,7 +22,7 @@
           <span class="text-xs text-gray-500"><%= gettext("Image file (.jpeg .jpg .gif .png) up to 100KB") %></span>
 
           <div class="mt-4 mb-8">
-            <%= submit gettext("Update Avatar"), class: "btn btn-primary btn-sm" %>
+            <%= submit gettext("Update Avatar"), class: "btn btn-dark btn-sm" %>
           </div>
 
         <% end %>

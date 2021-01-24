@@ -2,7 +2,7 @@
   <div class="w-full md:w-2/3 mt-4">
     <div class="shadow card">
       <div class="card-header">
-        <div class="font-semibold text-2xl text-primary"><%= gettext("Profile") %></div>
+        <div class="font-semibold text-2xl text-gray-500"><%= gettext("Profile") %></div>
       </div>
       <div class="card-body prose">
 
@@ -22,7 +22,7 @@
           </div>
 
           <div class="mt-4 mb-8">
-            <%= submit gettext("Save profile"), class: "btn btn-primary btn-sm" %>
+            <%= submit gettext("Save profile"), class: "btn btn-dark btn-sm" %>
           </div>
         <% end %>
 
