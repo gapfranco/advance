@@ -10,6 +10,9 @@ module.exports = {
       whitelist: []
     }
   },
-  // plugins: []
-  plugins: [require("kutty")]
+  plugins: [
+    require("kutty"),
+    require("@tailwindcss/typography"),
+    require('@tailwindcss/forms'),
+  ]
 }

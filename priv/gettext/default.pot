@@ -17,13 +17,13 @@ msgstr ""
 
 #, elixir-format
 #: lib/advance_web/templates/layout/_user_menu.html.eex:29
-#: lib/advance_web/templates/user_settings/edit.html.eex:5 lib/advance_web/templates/user_settings/edit.html.eex:31
+#: lib/advance_web/templates/user_settings/edit.html.eex:36
 msgid "Change e-mail"
 msgstr ""
 
 #, elixir-format
 #: lib/advance_web/templates/layout/_user_menu.html.eex:24
-#: lib/advance_web/templates/user_settings/update_password.html.eex:5 lib/advance_web/templates/user_settings/update_password.html.eex:36
+#: lib/advance_web/templates/user_settings/update_password.html.eex:6 lib/advance_web/templates/user_settings/update_password.html.eex:41
 msgid "Change password"
 msgstr ""
 
@@ -33,10 +33,11 @@ msgid "Change profile"
 msgstr ""
 
 #, elixir-format
-#: lib/advance_web/templates/layout/_user_menu.html.eex:60
-#: lib/advance_web/templates/user_confirmation/new.html.eex:14 lib/advance_web/templates/user_registration/new.html.eex:43
-#: lib/advance_web/templates/user_reset_password/edit.html.eex:32 lib/advance_web/templates/user_reset_password/new.html.eex:19
-#: lib/advance_web/templates/user_session/new.html.eex:1 lib/advance_web/templates/user_session/new.html.eex:25
+#: lib/advance_web/templates/layout/_user_menu.html.eex:62
+#: lib/advance_web/templates/layout/root.html.leex:86 lib/advance_web/templates/user_confirmation/new.html.eex:14
+#: lib/advance_web/templates/user_registration/new.html.eex:43 lib/advance_web/templates/user_reset_password/edit.html.eex:32
+#: lib/advance_web/templates/user_reset_password/new.html.eex:19 lib/advance_web/templates/user_session/new.html.eex:1
+#: lib/advance_web/templates/user_session/new.html.eex:25
 msgid "Log in"
 msgstr ""
 
@@ -47,15 +48,16 @@ msgstr ""
 
 #, elixir-format
 #: lib/advance_web/templates/layout/_user_menu.html.eex:20
-#: lib/advance_web/templates/user_settings/update_profile.html.eex:5
+#: lib/advance_web/templates/user_settings/update_profile.html.eex:6
 msgid "Profile"
 msgstr ""
 
 #, elixir-format
-#: lib/advance_web/templates/layout/_user_menu.html.eex:61
-#: lib/advance_web/templates/user_confirmation/new.html.eex:13 lib/advance_web/templates/user_registration/new.html.eex:1
-#: lib/advance_web/templates/user_registration/new.html.eex:34 lib/advance_web/templates/user_reset_password/edit.html.eex:31
-#: lib/advance_web/templates/user_reset_password/new.html.eex:18 lib/advance_web/templates/user_session/new.html.eex:34
+#: lib/advance_web/templates/layout/_user_menu.html.eex:63
+#: lib/advance_web/templates/layout/root.html.leex:87 lib/advance_web/templates/user_confirmation/new.html.eex:13
+#: lib/advance_web/templates/user_registration/new.html.eex:1 lib/advance_web/templates/user_registration/new.html.eex:34
+#: lib/advance_web/templates/user_reset_password/edit.html.eex:31 lib/advance_web/templates/user_reset_password/new.html.eex:18
+#: lib/advance_web/templates/user_session/new.html.eex:34
 msgid "Register"
 msgstr ""
 
@@ -96,6 +98,7 @@ msgstr ""
 
 #, elixir-format
 #: lib/advance_web/controllers/user_reset_password_controller.ex:25
+#: lib/advance_web/schema/resolvers/session_resolvers.ex:43
 msgid "If your email is in our system, you will receive instructions to reset your password shortly."
 msgstr ""
 
@@ -126,6 +129,7 @@ msgstr ""
 
 #, elixir-format
 #: lib/advance_web/controllers/user_reset_password_controller.ex:57
+#: lib/advance_web/schema/resolvers/session_resolvers.ex:69
 msgid "Reset password link is invalid or it has expired."
 msgstr ""
 
@@ -166,7 +170,7 @@ msgid "Already have an account?"
 msgstr ""
 
 #, elixir-format
-#: lib/advance_web/templates/user_settings/update_avatar.html.eex:5
+#: lib/advance_web/templates/user_settings/update_avatar.html.eex:6
 msgid "Avatar"
 msgstr ""
 
@@ -176,8 +180,8 @@ msgid "Confirm new password"
 msgstr ""
 
 #, elixir-format
-#: lib/advance_web/templates/user_settings/edit.html.eex:25
-#: lib/advance_web/templates/user_settings/update_password.html.eex:18
+#: lib/advance_web/templates/user_settings/edit.html.eex:30
+#: lib/advance_web/templates/user_settings/update_password.html.eex:23
 msgid "Current password"
 msgstr ""
 
@@ -194,7 +198,7 @@ msgid "I do rememebr my password"
 msgstr ""
 
 #, elixir-format
-#: lib/advance_web/templates/user_settings/update_avatar.html.eex:22
+#: lib/advance_web/templates/user_settings/update_avatar.html.eex:27
 msgid "Image file (.jpeg .jpg .gif .png) up to 100KB"
 msgstr ""
 
@@ -205,20 +209,20 @@ msgstr ""
 
 #, elixir-format
 #: lib/advance_web/templates/user_registration/new.html.eex:16
-#: lib/advance_web/templates/user_settings/update_profile.html.eex:19
+#: lib/advance_web/templates/user_settings/update_profile.html.eex:24
 msgid "Name"
 msgstr ""
 
 #, elixir-format
 #: lib/advance_web/templates/user_reset_password/edit.html.eex:10
-#: lib/advance_web/templates/user_settings/update_password.html.eex:24
+#: lib/advance_web/templates/user_settings/update_password.html.eex:29
 msgid "New password"
 msgstr ""
 
 #, elixir-format
 #: lib/advance_web/templates/user_registration/new.html.eex:5
-#: lib/advance_web/templates/user_reset_password/edit.html.eex:5 lib/advance_web/templates/user_settings/update_password.html.eex:12
-#: lib/advance_web/templates/user_settings/update_profile.html.eex:12
+#: lib/advance_web/templates/user_reset_password/edit.html.eex:5 lib/advance_web/templates/user_settings/update_password.html.eex:17
+#: lib/advance_web/templates/user_settings/update_profile.html.eex:17
 msgid "Oops, something went wrong! Please check the errors below."
 msgstr ""
 
@@ -230,7 +234,7 @@ msgstr ""
 
 #, elixir-format
 #: lib/advance_web/templates/user_registration/new.html.eex:28
-#: lib/advance_web/templates/user_settings/update_password.html.eex:30
+#: lib/advance_web/templates/user_settings/update_password.html.eex:35
 msgid "Password confirmation"
 msgstr ""
 
@@ -245,7 +249,7 @@ msgid "Reset password"
 msgstr ""
 
 #, elixir-format
-#: lib/advance_web/templates/user_settings/update_profile.html.eex:25
+#: lib/advance_web/templates/user_settings/update_profile.html.eex:30
 msgid "Save profile"
 msgstr ""
 
@@ -255,7 +259,7 @@ msgid "Send password reset instructions"
 msgstr ""
 
 #, elixir-format
-#: lib/advance_web/templates/user_settings/update_avatar.html.eex:25
+#: lib/advance_web/templates/user_settings/update_avatar.html.eex:30
 msgid "Update Avatar"
 msgstr ""
 
@@ -296,6 +300,7 @@ msgstr ""
 
 #, elixir-format
 #: lib/advance/accounts/user_notifier.ex:157
+#: lib/advance/accounts/user_notifier.ex:226
 msgid "Password reset instructions"
 msgstr ""
 
@@ -305,6 +310,47 @@ msgid "Please confirm your account"
 msgstr ""
 
 #, elixir-format
-#: lib/advance/accounts/user_notifier.ex:226
+#: lib/advance/accounts/user_notifier.ex:295
 msgid "Email change instructions"
+msgstr ""
+
+#, elixir-format
+#: lib/advance_web/templates/user_settings/update_avatar.html.eex:9
+msgid "Change your avatar"
+msgstr ""
+
+#, elixir-format
+#: lib/advance_web/templates/user_settings/update_password.html.eex:9
+msgid "Change your current password"
+msgstr ""
+
+#, elixir-format
+#: lib/advance_web/templates/user_settings/edit.html.eex:9
+msgid "Change your e-mail"
+msgstr ""
+
+#, elixir-format
+#: lib/advance_web/templates/user_settings/update_profile.html.eex:9
+msgid "Change your profile"
+msgstr ""
+
+#, elixir-format
+#: lib/advance_web/templates/user_settings/edit.html.eex:6
+msgid "E-Mail"
+msgstr ""
+
+#, elixir-format
+#: lib/advance_web/schema/resolvers/session_resolvers.ex:90
+msgid "Password updated successfully"
+msgstr ""
+
+#, elixir-format
+#: lib/advance_web/schema/resolvers/session_resolvers.ex:62
+msgid "Password was changed successfully"
+msgstr ""
+
+#, elixir-format
+#: lib/advance_web/schema/resolvers/session_resolvers.ex:97
+#: lib/advance_web/schema/resolvers/session_resolvers.ex:119
+msgid "an error occurred"
 msgstr ""

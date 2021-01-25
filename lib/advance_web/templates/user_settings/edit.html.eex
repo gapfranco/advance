@@ -1,8 +1,13 @@
 <div class="flex justify-center">
   <div class="w-full md:w-2/3 mt-4">
     <div class="shadow card">
-      <div class="card-header">
-        <div class="font-semibold text-2xl text-gray-500"><%= gettext("Change e-mail") %></div>
+      <div class="card-header flex-col items-start">
+        <h3 class="card_title">
+          <%= gettext("E-Mail") %>
+        </h3>
+        <p class="card_subtitle">
+          <%= gettext("Change your e-mail") %>
+        </p>
       </div>
       <div class="card-body prose">
 
@@ -27,7 +32,7 @@
             <span class="text-red-600"><%= error_tag f, :current_password %></span>
           </div>
 
-          <div class="mt-4 mb-8">
+          <div class="mt-4 mb-2">
             <%= submit gettext("Change e-mail"), class: "btn btn-dark btn-sm" %>
           </div>
         <% end %>
