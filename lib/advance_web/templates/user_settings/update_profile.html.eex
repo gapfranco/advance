@@ -27,7 +27,7 @@
           </div>
 
           <div class="mt-4 mb-2">
-            <%= submit gettext("Save profile"), class: "btn btn-dark btn-sm" %>
+            <%= submit gettext("Save profile"), class: "btn btn-primary btn-sm" %>
           </div>
         <% end %>
 

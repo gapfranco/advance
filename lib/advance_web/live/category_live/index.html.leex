@@ -46,9 +46,9 @@
                     </div>
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <span class="m-1 text-indigo-600 hover:text-indigo-900"><%= live_redirect gettext("Show"), to: Routes.category_show_path(@socket, :show, category) %></span>
-                    <span class="m-1 text-indigo-600 hover:text-indigo-900"><%= live_patch gettext("Edit"), to: Routes.category_index_path(@socket, :edit, category) %></span>
-                    <span class="m-1 text-indigo-600 hover:text-indigo-900"><%= link gettext("Delete"), to: "#", phx_click: "delete", phx_value_id: category.id, data: [confirm: "Are you sure?"] %></span>
+                    <span class="mr-1 btn btn-xs btn-light-primary"><%= live_redirect gettext("Show"), to: Routes.category_show_path(@socket, :show, category) %></span>
+                    <span class="mr-1 btn btn-xs btn-light-primary"><%= live_patch gettext("Edit"), to: Routes.category_index_path(@socket, :edit, category) %></span>
+                    <span class="mr-1 btn btn-xs btn-light-primary"><%= link gettext("Delete"), to: "#", phx_click: "delete", phx_value_id: category.id, data: [confirm: "Are you sure?"] %></span>
                   </td>
                 </tr>
               <% end %>
