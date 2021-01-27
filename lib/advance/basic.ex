@@ -21,6 +21,27 @@ defmodule Advance.Basic do
     Repo.all(Category)
   end
 
+  def list_categories(criteria) when is_list(criteria) do
+    query = from(d in Category)
+
+    sub_query = from(t in subquery(query), select: count("*"))
+    count = Repo.one(sub_query)
+
+    query =
+      Enum.reduce(criteria, query, fn
+        {:paginate, %{page: page, per_page: per_page}}, query ->
+          from q in query,
+            offset: ^((page - 1) * per_page),
+            limit: ^per_page
+
+        {:sort, %{sort_by: sort_by, sort_order: sort_order}}, query ->
+          from q in query, order_by: [{^sort_order, ^sort_by}]
+      end)
+
+    list = Repo.all(query)
+    %{list: list, total: count}
+  end
+
   @doc """
   Gets a single category.
 

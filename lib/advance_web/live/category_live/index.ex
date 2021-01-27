@@ -6,11 +6,29 @@ defmodule AdvanceWeb.CategoryLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, :categories, list_categories())}
+    {:ok, socket, temporary_assigns: [categories: []]}
+    # {:ok, assign(socket, :categories, list_categories())}
   end
 
   @impl true
   def handle_params(params, _url, socket) do
+    page = String.to_integer(params["page"] || "1")
+    per_page = String.to_integer(params["per_page"] || "8")
+
+    sort_by = :name
+    sort_order = :asc
+
+    sort_options = %{sort_by: sort_by, sort_order: sort_order}
+    paginate_options = %{page: page, per_page: per_page}
+
+    result = Basic.list_categories(paginate: paginate_options, sort: sort_options)
+    categories = result.list
+    total = ceil(result.total / per_page)
+    paginate_options = Map.put(paginate_options, :total, total)
+
+    socket =
+      assign(socket, categories: categories, options: Map.merge(paginate_options, sort_options))
+
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
@@ -37,10 +55,34 @@ defmodule AdvanceWeb.CategoryLive.Index do
     category = Basic.get_category!(id)
     {:ok, _} = Basic.delete_category(category)
 
-    {:noreply, assign(socket, :categories, list_categories())}
+    {:noreply, assign(socket, :categories, [])}
   end
 
-  defp list_categories do
-    Basic.list_categories()
+  defp pagination_link(socket, text, page, options) do
+    live_patch(text,
+      to: Routes.category_index_path(socket, :index, page: page, per_page: options)
+    )
+  end
+
+  defp render_next() do
+    assigns = %{:__changed__ => ""}
+
+    ~L"""
+    <!-- Heroicon name: chevron-right -->
+    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+    </svg>
+    """
+  end
+
+  defp render_prev() do
+    assigns = %{:__changed__ => ""}
+
+    ~L"""
+    <!-- Heroicon name: chevron-left -->
+    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+    </svg>
+    """
   end
 end

@@ -4,7 +4,7 @@ defmodule AdvanceWeb.PageLive do
 
   @impl true
   def mount(_params, %{"locale" => locale}, socket) do
-    Gettext.put_locale(AdvanceWeb.Gettext, locale)
+    if locale, do: Gettext.put_locale(AdvanceWeb.Gettext, locale)
     {:ok, assign(socket, query: "", results: %{})}
   end
 
