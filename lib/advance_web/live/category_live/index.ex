@@ -12,8 +12,8 @@ defmodule AdvanceWeb.CategoryLive.Index do
 
   @impl true
   def handle_params(params, _url, socket) do
-    page = String.to_integer(params["page"] || "1")
-    per_page = String.to_integer(params["per_page"] || "8")
+    page = param_to_integer(params["page"] || "1", 1)
+    per_page = param_to_integer(params["per_page"] || "8", 8)
 
     sort_by = :name
     sort_order = :asc
@@ -30,6 +30,19 @@ defmodule AdvanceWeb.CategoryLive.Index do
       assign(socket, categories: categories, options: Map.merge(paginate_options, sort_options))
 
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
+  end
+
+  defp param_to_integer(param, default_value) do
+    case Integer.parse(param) do
+      {0, _} ->
+        1
+
+      {number, _} ->
+        number
+
+      :error ->
+        default_value
+    end
   end
 
   defp apply_action(socket, :edit, %{"id" => id}) do
