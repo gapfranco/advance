@@ -4,7 +4,7 @@
     title: @page_title,
     action: @live_action,
     category: @category,
-    return_to: Routes.category_show_path(@socket, :show, @category) %>
+    return_to: Routes.category_show_path(@socket, :show, @category, page: @page, per_page: @per_page, filter: @filter) %>
 <% end %>
 
 <div class="bg-white shadow overflow-hidden sm:rounded-lg">
@@ -26,8 +26,8 @@
     </dl>
   </div>
   <div class="m-4">
-    <%= live_patch gettext("Edit"), to: Routes.category_show_path(@socket, :edit, @category), class: "btn btn-light-primary btn-sm" %>
-    <%= live_redirect gettext("Back"), to: Routes.category_index_path(@socket, :index), class: "btn btn-light-primary btn-sm" %>
+    <%= live_patch gettext("Edit"), to: Routes.category_show_path(@socket, :edit, @category, page: @page, per_page: @per_page, filter: @filter), class: "btn btn-light-primary btn-sm" %>
+    <%= live_redirect gettext("Back"), to: Routes.category_index_path(@socket, :index, page: @page, per_page: @per_page, filter: @filter), class: "btn btn-light-primary btn-sm" %>
   </div>
 
 </div>

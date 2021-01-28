@@ -8,6 +8,11 @@ defmodule Advance.Basic do
 
   alias Advance.Basic.Category
 
+  ### REAL-TIME
+  # def subscribe do
+  #   Phoenix.PubSub.subscribe(Advance.PubSub, "categories")
+  # end
+
   @doc """
   Returns the list of categories.
 
@@ -24,6 +29,21 @@ defmodule Advance.Basic do
   def list_categories(criteria) when is_list(criteria) do
     query = from(d in Category)
 
+    query =
+      Enum.reduce(criteria, query, fn
+        {:filter, ""}, query ->
+          query
+
+        {:filter, filter}, query ->
+          pattern = "#{filter}%"
+
+          from q in query,
+            where: ilike(q.name, ^pattern)
+
+        _, query ->
+          query
+      end)
+
     sub_query = from(t in subquery(query), select: count("*"))
     count = Repo.one(sub_query)
 
@@ -34,8 +54,20 @@ defmodule Advance.Basic do
             offset: ^((page - 1) * per_page),
             limit: ^per_page
 
+        {:filter, ""}, query ->
+          query
+
+        {:filter, filter}, query ->
+          pattern = "#{filter}%"
+
+          from q in query,
+            where: ilike(q.name, ^pattern)
+
         {:sort, %{sort_by: sort_by, sort_order: sort_order}}, query ->
           from q in query, order_by: [{^sort_order, ^sort_by}]
+
+        _, query ->
+          query
       end)
 
     list = Repo.all(query)
@@ -74,6 +106,9 @@ defmodule Advance.Basic do
     %Category{}
     |> Category.changeset(attrs)
     |> Repo.insert()
+
+    ### REAL-TIME
+    # |> broadcast(:category_created)
   end
 
   @doc """
@@ -92,6 +127,9 @@ defmodule Advance.Basic do
     category
     |> Category.changeset(attrs)
     |> Repo.update()
+
+    ### REAL-TIME
+    # |> broadcast(:category_updated)
   end
 
   @doc """
@@ -122,4 +160,12 @@ defmodule Advance.Basic do
   def change_category(%Category{} = category, attrs \\ %{}) do
     Category.changeset(category, attrs)
   end
+
+  ### REAL-TIME
+  # def broadcast({:ok, category}, event) do
+  #   Phoenix.PubSub.broadcast(Advance.PubSub, "categories", {event, category})
+  #   {:ok, category}
+  # end
+
+  # def broadcast({:error, _reason} = error, _event), do: error
 end

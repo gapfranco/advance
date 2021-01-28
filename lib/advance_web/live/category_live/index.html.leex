@@ -4,12 +4,12 @@
     title: @page_title,
     action: @live_action,
     category: @category,
-    return_to: Routes.category_index_path(@socket, :index, page: @options.page, per_page: @options.per_page) %>
+    return_to: Routes.category_index_path(@socket, :index, page: @options.page, per_page: @options.per_page, filter: @filter) %>
 <% end %>
 
 
 <!-- This example requires Tailwind CSS v2.0+ -->
-<div class="bg-white shadow overflow-hidden sm:rounded-lg divide-y-2">
+<div class="bg-white shadow overflow-hidden sm:rounded-lg">
   <div class="px-4 py-4 sm:px-6 ">
     <h3 class="text-lg leading-6 font-medium text-gray-900">
       <%= gettext("Categories") %>
@@ -17,6 +17,15 @@
     <p class="mt-1 max-w-2xl text-sm text-gray-500">
       <%= gettext("Available categories") %>
     </p>
+  </div>
+  <div class="form-icon form-icon-l">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+    </svg>
+    <form phx-submit="filter">
+      <%= text_input :filter, :filter, placeholder: "Search", class: "form-input border-l-0 border-r-0 border-t-0 rounded-none" %>
+      <!-- <input class="form-input border-l-0 border-r-0 border-t-0 rounded-none" placeholder="Search"> -->
+    </form>
   </div>
   <div class="flex flex-col">
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -46,9 +55,9 @@
                     </div>
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <span class="mr-1 btn btn-xs btn-light-primary"><%= live_redirect gettext("Show"), to: Routes.category_show_path(@socket, :show, category) %></span>
-                    <span class="mr-1 btn btn-xs btn-light-primary"><%= live_patch gettext("Edit"), to: Routes.category_index_path(@socket, :edit, category, page: @options.page, per_page: @options.per_page) %></span>
-                    <span class="mr-1 btn btn-xs btn-light-primary"><%= link gettext("Delete"), to: Routes.category_index_path(@socket, :index, page: @options.page, per_page: @options.per_page), phx_click: "delete", phx_value_id: category.id, data: [confirm: "Are you sure?"] %></span>
+                    <span class="mr-1 btn btn-xs btn-light-primary"><%= live_redirect gettext("Show"), to: Routes.category_show_path(@socket, :show, category, page: @options.page, per_page: @options.per_page, filter: @filter) %></span>
+                    <span class="mr-1 btn btn-xs btn-light-primary"><%= live_patch gettext("Edit"), to: Routes.category_index_path(@socket, :edit, category, page: @options.page, per_page: @options.per_page, filter: @filter) %></span>
+                    <span class="mr-1 btn btn-xs btn-light-primary"><%= link gettext("Delete"), to: Routes.category_index_path(@socket, :index, page: @options.page, per_page: @options.per_page, filter: @filter), phx_click: "delete", phx_value_id: category.id, data: [confirm: "Are you sure?"] %></span>
                   </td>
                 </tr>
               <% end %>
@@ -65,7 +74,7 @@
   <nav class="mt-3 relative z-0 inline-flex shadow-sm -space-x-px" aria-label="Pagination">
     <%= if @options.page > 1 do %>
       <span class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-        <%= pagination_link(@socket, render_prev(), @options.page - 1, @options.per_page) %>
+        <%= pagination_link(@socket, render_prev(), @options.page - 1, @options.per_page, @filter) %>
       </span>
     <% end %>
     <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-400 hover:bg-gray-50">
@@ -73,7 +82,7 @@
     </span>
     <%= if @options.page < @options.total do %>
     <span class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-      <%= pagination_link(@socket, render_next(), @options.page + 1, @options.per_page) %>
+      <%= pagination_link(@socket, render_next(), @options.page + 1, @options.per_page, @filter) %>
     </span>
     <% end %>
 

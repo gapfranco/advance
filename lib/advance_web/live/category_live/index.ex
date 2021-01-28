@@ -6,7 +6,11 @@ defmodule AdvanceWeb.CategoryLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, socket, temporary_assigns: [categories: []]}
+    ### REAL-TIME
+    # if connected?(socket), do: Basic.subscribe()
+
+    socket = assign(socket, categories: [])
+    {:ok, socket}
     # {:ok, assign(socket, :categories, list_categories())}
   end
 
@@ -14,22 +18,35 @@ defmodule AdvanceWeb.CategoryLive.Index do
   def handle_params(params, _url, socket) do
     page = param_to_integer(params["page"] || "1", 1)
     per_page = param_to_integer(params["per_page"] || "8", 8)
+    filter = params["filter"] || ""
+    socket = prepare_params(socket, page, per_page, filter)
 
+    {:noreply, apply_action(socket, socket.assigns.live_action, params)}
+  end
+
+  def prepare_params(socket, page, per_page, filter) do
     sort_by = :name
     sort_order = :asc
-
     sort_options = %{sort_by: sort_by, sort_order: sort_order}
     paginate_options = %{page: page, per_page: per_page}
 
-    result = Basic.list_categories(paginate: paginate_options, sort: sort_options)
+    result =
+      Basic.list_categories(
+        paginate: paginate_options,
+        sort: sort_options,
+        filter: filter
+      )
+
     categories = result.list
     total = ceil(result.total / per_page)
     paginate_options = Map.put(paginate_options, :total, total)
 
-    socket =
-      assign(socket, categories: categories, options: Map.merge(paginate_options, sort_options))
-
-    {:noreply, apply_action(socket, socket.assigns.live_action, params)}
+    socket
+    |> assign(
+      categories: categories,
+      options: Map.merge(paginate_options, sort_options),
+      filter: filter
+    )
   end
 
   defp param_to_integer(param, default_value) do
@@ -71,9 +88,17 @@ defmodule AdvanceWeb.CategoryLive.Index do
     {:noreply, assign(socket, :categories, [])}
   end
 
-  defp pagination_link(socket, text, page, options) do
+  # def handle_event("filter", %{"filter" => filter}, socket) do
+  def handle_event("filter", %{"filter" => %{"filter" => filter}}, socket) do
+    socket = prepare_params(socket, 1, 8, filter)
+
+    {:noreply, socket}
+  end
+
+  defp pagination_link(socket, text, page, options, filter) do
     live_patch(text,
-      to: Routes.category_index_path(socket, :index, page: page, per_page: options)
+      to:
+        Routes.category_index_path(socket, :index, page: page, per_page: options, filter: filter)
     )
   end
 
@@ -98,4 +123,17 @@ defmodule AdvanceWeb.CategoryLive.Index do
     </svg>
     """
   end
+
+  ### REAL_TIME
+  # @impl true
+  # def handle_info({:category_created, category}, socket) do
+  #   socket = update(socket, :categories, fn categories -> [category | categories] end)
+  #   {:noreply, socket}
+  # end
+
+  # @impl true
+  # def handle_info({:category_updated, category}, socket) do
+  #   socket = update(socket, :categories, fn categories -> [category | categories] end)
+  #   {:noreply, socket}
+  # end
 end
