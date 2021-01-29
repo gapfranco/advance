@@ -43,21 +43,11 @@
                 Advance
               </a>
             </div>
-            <%= if @current_user do %>
-            <div class="hidden sm:block sm:ml-6" >
-              <div class="flex space-x-4">
-                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                <%= link "Categories", to: Routes.category_index_path(@conn, :index), class: "text-gray-500 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>
-                <a href="#" class="text-gray-500 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
-                <a href="#" class="text-gray-500 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Team</a>
-                <a href="#" class="text-gray-500 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Projects</a>
-                <a href="#" class="text-gray-500 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Calendar</a>
-                <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-                  <%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "text-primary hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>
-                <% end %>
-    
+            <%= if @current_user && @current_user.role === :admin do %>
+              <!-- admin menu -->
+              <div class="hidden sm:block sm:ml-6 sm:flex sm:flex-1 sm:flex-grow sm:flex-row-reverse" >
+                <%= render "_admin_menu.html", assigns %>
               </div>
-            </div>
             <% end %>
           </div>
           <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
@@ -74,11 +64,12 @@
       <div :class="{'hidden': !isOn}" class="sm:hidden">
         <div class="px-2 pt-2 pb-3 space-y-1">
           <%= if @current_user do %>
-            <%= link "Categories", to: Routes.category_index_path(@conn, :index), class: "text-gray-500 block hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>
-            <a href="#" class="text-gray-500 hover:bg-gray-700 hover:text-white px-3 py-2 block rounded-md text-sm font-medium">Dashboard</a>
-            <a href="#" class="text-gray-500 hover:bg-gray-700 hover:text-white px-3 py-2 block rounded-md text-sm font-medium">Team</a>
-            <a href="#" class="text-gray-500 hover:bg-gray-700 hover:text-white px-3 py-2 block rounded-md text-sm font-medium">Projects</a>
-            <a href="#" class="text-gray-500 hover:bg-gray-700 hover:text-white px-3 py-2 block rounded-md text-sm font-medium">Calendar</a>
+            <%= if @current_user.role === :admin do %> 
+              <%= link "Categories", to: Routes.category_index_path(@conn, :index), class: "text-gray-500 block hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>
+            <% end %>
+            <%= if @current_user.role === :admin do %> 
+              <%= link "Tags", to: Routes.category_index_path(@conn, :index), class: "text-gray-500 block hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>
+            <% end %>
             <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
               <%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>
             <% end %>
