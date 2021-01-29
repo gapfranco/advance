@@ -89,7 +89,7 @@ defmodule AdvanceWeb.CategoryLive.Index do
   end
 
   # def handle_event("filter", %{"filter" => filter}, socket) do
-  def handle_event("filter", %{"filter" => %{"filter" => filter}}, socket) do
+  def handle_event("filter", %{"filter" => filter}, socket) do
     socket = prepare_params(socket, 1, 8, filter)
 
     {:noreply, socket}
