@@ -17,6 +17,11 @@
           <%= text_input f, :name, required: true, class: "form-input" %>
           <span class="text-red-600"><%= error_tag f, :name %></span>
         </div>
+        <div class="mb-6">
+          <%= label f, :description, gettext("Description"), class: "form-label" %>
+          <%= textarea f, :description, required: true, rows: 3, class: "form-input" %>
+          <span class="text-red-600"><%= error_tag f, :description %></span>
+        </div>
 
         <div class="mt-4 mb-2">
           <%= submit gettext("Save"), phx_disable_with: "Saving...", class: "btn btn-primary btn-sm" %>

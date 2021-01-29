@@ -4,6 +4,7 @@ defmodule Advance.Basic.Category do
 
   schema "categories" do
     field :name, :string
+    field :description, :string
 
     timestamps()
   end
@@ -11,7 +12,7 @@ defmodule Advance.Basic.Category do
   @doc false
   def changeset(category, attrs) do
     category
-    |> cast(attrs, [:name])
+    |> cast(attrs, [:name, :description])
     |> validate_required([:name])
   end
 end
